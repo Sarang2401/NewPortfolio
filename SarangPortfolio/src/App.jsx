@@ -34,7 +34,7 @@ const App = () => {
       <Contact />
       <footer>
         <div className="container">
-          <p>Made with ❤️ 💻 and ☕ by Sarang Shigwan</p>
+          <p>Made with 💻,☕ and ❤️ by Sarang Shigwan</p>
         </div>
       </footer>
     </motion.div>
