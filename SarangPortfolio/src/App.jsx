@@ -21,17 +21,34 @@ const App = () => {
       <Hero />
       <About />
       <Skills />
+
       <section id="projects" className="projects">
         <div className="container">
           <h2>Projects</h2>
+
+          {/* Display only the first 3 projects */}
           <div className="projects-grid">
-            {projectsData.map((project, index) => (
+            {projectsData.slice(0, 3).map((project, index) => (
               <ProjectCard key={index} project={project} />
             ))}
           </div>
+
+          {/* View All Projects Button */}
+          <div className="view-all-projects">
+            <a
+              href="https://github.com/yourusername" // replace with your actual GitHub profile or repo collection link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-button"
+            >
+              View All Projects on GitHub
+            </a>
+          </div>
         </div>
       </section>
+
       <Contact />
+
       <footer>
         <div className="container">
           <p>Made with 💻,☕ and ❤️ by Sarang Shigwan</p>
