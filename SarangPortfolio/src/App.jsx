@@ -36,7 +36,7 @@ const App = () => {
           {/* View All Projects Button */}
           <div className="view-all-projects">
             <a
-              href="https://github.com/yourusername" // replace with your actual GitHub profile or repo collection link
+              href="https://github.com/Sarang2401" // replace with your actual GitHub profile or repo collection link
               target="_blank"
               rel="noopener noreferrer"
               className="cta-button"

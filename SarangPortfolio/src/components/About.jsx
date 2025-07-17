@@ -8,14 +8,14 @@ const About = () => {
   const timelineData = [
     {
       year: '2025',
-      title: 'AWS Intern',
+      title: 'Backend Intern(AWS)',
       company: 'EvolvingX Pvt. Ltd.',
       location: 'Remote',
-      description: 'Led development of scalable web applications using React.js and Node.js. Collaborated with cross-functional teams to deliver high-quality software solutions.',
+      description: 'Worked at the intersection of cloud technology and web development to build scalable, production-grade applications. Contributed to both frontend and backend ecosystems using React.js and Django, ensuring seamless user experiences and robust server-side logic.',
       achievements: [
-        'Improved application performance by 40%',
-        'Mentored 3 junior developers',
-        'Implemented CI/CD pipelines'
+        'Developed a first-of-its-kind platform to bridge the gap between students and colleges',
+        'Designed and implemented modern, responsive UI/UX patterns',
+        'Gained hands-on experience with cloud-native deployments and AWS services'
       ],
       type: 'internship'
     },
@@ -24,11 +24,11 @@ const About = () => {
       title: 'Cybersecurity Intern',
       company: 'Cisco Virtual Internship ',
       location: 'Virtual',
-      description: 'Specialized in creating responsive and interactive user interfaces. Worked closely with UX designers to bring designs to life.',
+      description: 'Focused on designing secure network architectures and conducting vulnerability assessments to evaluate and improve cybersecurity posture. Gained hands-on experience in both offensive and defensive security strategies, along with technical documentation practices.',
       achievements: [
-        'Built 15+ responsive web applications',
-        'Reduced load time by 60%',
-        'Implemented modern UI/UX patterns'
+        'Built a full-scale digital replica of college network infrastructure using Cisco tools',
+        'Implemented modern Switch and Routing protocols',
+        'Performed vulnerability assessments and documented security enhancements'
       ],
       type: 'Intern'
     },
@@ -37,11 +37,11 @@ const About = () => {
       title: 'IoT and Automation',
       company: 'Team Achilles',
       location: 'Pune, India',
-      description: 'Started my professional journey as a junior developer, focusing on learning best practices and contributing to various projects.',
+      description: 'Embarked on my engineering journey with a focus on IoT and automation technologies, contributing to real-world automotive projects. Learned system integration, innovation workflows, and how to apply machine learning in embedded systems.',
       achievements: [
-        'Completed 10+ projects successfully',
-        'Learned agile development methodologies',
-        'Contributed to open-source projects'
+        'Designed and developed two key subsystems for vehicle automation',
+        'Optimized existing architectures, resulting in 60% performance improvements',
+        'Introduced machine learning capabilities to enhance system intelligence and autonomy'
       ],
       type: 'Student Club'
     },
@@ -51,7 +51,7 @@ const About = () => {
   const stats = [
     { icon: Code, label: 'Projects Completed', value: '10+' },
     { icon: BookOpen, label: 'Blog Posts Written', value: '25+' },
-    { icon: Users, label: 'CTFs Solved', value: '100+' },
+    { icon: Code, label: 'CTFs Solved', value: '100+' },
     { icon: Award, label: 'Years Of Experience', value: '1' }
   ];
 
@@ -102,10 +102,10 @@ const About = () => {
                   I am a dedicated and enthusiastic <span className="highlight">SaaS Developer</span> with a passion for creating secure digital solutions. My journey in software development is driven by curiosity, creativity, and a commitment to excellence.
                 </p>
                 <p>
-                  With expertise in modern technologies like React.js, Node.js, and various database systems, I specialize in building scalable, efficient applications that solve real-world problems. I thrive in collaborative environments and enjoy mentoring fellow developers.
+                  With expertise in Cloud Computing and CyberSecurity, I specialize in building scalable, efficient applications that solve real-world problems. I thrive in collaborative environments and enjoy mentoring fellow developers.
                 </p>
                 <p>
-                  Beyond coding, I'm an active <span className="highlight">technical blog writer</span>, sharing insights and tutorials with the developer community. I believe in continuous learning and staying ahead of industry trends to deliver cutting-edge solutions.
+                  I believe in learning by doing, and I’m always on the lookout for challenging problems that push me to grow. Welcome to my portfolio — a curated space where curiosity meets capability.
                 </p>
               </div>
               <div className="about-image">
@@ -141,7 +141,7 @@ const About = () => {
             </div>
             <div className="blog-content">
               <p>
-                I regularly write technical articles covering web development, best practices, and emerging technologies. My blog posts have helped thousands of developers worldwide improve their skills and solve complex problems.
+                I regularly write technical articles covering CyberSecurity, best practices, and emerging technologies. My blog posts have helped thousands of developers worldwide improve their skills and solve complex problems.
               </p>
               <div className="blog-topics">
                 <span className="topic-tag">OWASP</span>

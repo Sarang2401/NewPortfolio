@@ -1,27 +1,28 @@
+import artemis from '../assets/artemis.png';
+import devdock from '../assets/devdock.png';
+import ResponseForge from '../assets/ResponseForge.png';
+
 const projects = [
     {
       name: 'ARTEMIS',
-      description: 'Project ARTEMIS sets a new benchmark for enterprise cybersecurity by integrating threat detection, intelligence gathering, structured response, and proactive testing into a unified framework.',
-      image: '../assets/hero-bg.png', // Replace with actual image path
-      liveDemo: 'https://live-demo-link-one.com', // Optional
-      githubLink: 'https://github.com/yourusername/project-one', // Optional
+      description: 'ARTEMIS is a next-generation enterprise cybersecurity platform that unifies threat detection, cyber threat intelligence, incident response automation, and red-teaming capabilities into a seamless, battle-ready framework. Designed for scalability and resilience, ARTEMIS empowers organizations to stay ahead of evolving cyber threats with precision and speed.',
+      image: artemis,
+      githubLink: 'https://github.com/Sarang2401/Artemis', 
     },
     {
       name: 'DevDock',
-      description: 'DevDock is a comprehensive DevOps solution that implements a fully automated, end-to-end CI/CD pipeline using AWS, Docker, Terraform, and GitHub Actions. Built as part of my internship, the project follows a monorepo structure that houses both the backend (developed with Python Flask/FastAPI) and the frontend (built with Next.js).',
-      image: '/path/to/project2.png', // Replace with actual image path
-      liveDemo: 'https://live-demo-link-two.com', 
-      githubLink: 'https://github.com/yourusername/project-two', // Optional
+      description: 'DevDock is a fully automated DevOps pipeline built for modern cloud-native applications. It integrates AWS, Docker, Terraform, and GitHub Actions to deliver an end-to-end CI/CD experience — from code commit to production deployment — with zero manual intervention.',
+      image: devdock, 
+      githubLink: 'https://github.com/Sarang2401/DevDock', 
     },
     {
-      name: 'DevDock',
-      description: 'DevDock is a comprehensive DevOps solution that implements a fully automated, end-to-end CI/CD pipeline using AWS, Docker, Terraform, and GitHub Actions. Built as part of my internship, the project follows a monorepo structure that houses both the backend (developed with Python Flask/FastAPI) and the frontend (built with Next.js).',
-      image: '/path/to/project2.png', // Replace with actual image path
-      liveDemo: 'https://live-demo-link-two.com', 
-      githubLink: 'https://github.com/yourusername/project-two', // Optional
+      name: 'Response Forge',
+      description: 'Response Forge streamlines Governance, Risk, and Compliance (GRC) operations by generating tailored Incident Response (IR) plans at the click of a button. It uses the NIST 800-series as a foundational blueprint to help organizations craft detailed, audit-ready playbooks in minutes.',
+      image: ResponseForge, 
+      githubLink: 'https://github.com/Sarang2401/ResponseForge', 
     },
     
-    // Add more projects as needed
+    
   ];
   
   export default projects;
