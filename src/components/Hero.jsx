@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import myImage from '../assets/SarangShigwan.jpg';
+import myImage from '../assets/rdj.jpg';
 
 
 const Hero = () => {
@@ -38,7 +38,7 @@ const Hero = () => {
           </motion.button>
         </div>
         <div className="hero-image-frame">
-          {/* Replace with your image */}
+          
           <img src={myImage} alt="Portrait of Sarang Shigwan" />
 
         </div>
