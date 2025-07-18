@@ -39,7 +39,7 @@ const App = () => {
               href="https://github.com/Sarang2401" // replace with your actual GitHub profile or repo collection link
               target="_blank"
               rel="noopener noreferrer"
-              className="cta-button"
+              className="project-links"
             >
               View All Projects on GitHub
             </a>

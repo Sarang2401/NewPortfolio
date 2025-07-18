@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Award, BookOpen, Code, Users, Lightbulb } from 'lucide-react';
+import { Calendar, Laptop, MapPin, Award, BookOpen, Code, Users, Lightbulb } from 'lucide-react';
+
+
 
 const About = () => {
   const [activeTimeline, setActiveTimeline] = useState(0);
@@ -93,7 +95,7 @@ const About = () => {
           viewport={{ once: true }}
           className="about-content"
         >
-          {/* Main About Content */}
+          
           <div className="about-header">
             <motion.h2 variants={itemVariants}>About Me</motion.h2>
             <motion.div variants={itemVariants} className="about-intro">
@@ -111,7 +113,7 @@ const About = () => {
               <div className="about-image">
                 <div className="image-placeholder">
                   <div className="image-overlay">
-                    <Lightbulb size={48} />
+                    <Laptop size={96} />
                   </div>
                 </div>
               </div>
