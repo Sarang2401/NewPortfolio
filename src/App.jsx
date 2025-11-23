@@ -7,9 +7,11 @@ import ProjectCard from './components/ProjectCard';
 import Contact from './components/Contact';
 import projectsData from './data/projects';
 import './styles.css';
-import { motion } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 
 const App = () => {
+  const { scrollYProgress } = useScroll();
+
   return (
     <motion.div
       className="app"
@@ -17,6 +19,36 @@ const App = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
     >
+      {/* Left side scroll progress bar */}
+      <motion.div
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: '4px',
+          background: 'linear-gradient(180deg, #3b82f6, #8b5cf6, #ec4899)',
+          transformOrigin: 'top',
+          scaleY: scrollYProgress,
+          zIndex: 9999
+        }}
+      />
+
+      {/* Right side scroll progress bar */}
+      <motion.div
+        style={{
+          position: 'fixed',
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: '4px',
+          background: 'linear-gradient(180deg, #ec4899, #8b5cf6, #3b82f6)',
+          transformOrigin: 'top',
+          scaleY: scrollYProgress,
+          zIndex: 9999
+        }}
+      />
+
       <Navbar />
       <Hero />
       <About />
@@ -36,7 +68,7 @@ const App = () => {
           {/* View All Projects Button */}
           <div className="view-all-projects">
             <a
-              href="https://github.com/Sarang2401" // replace with your actual GitHub profile or repo collection link
+              href="https://github.com/Sarang2401"
               target="_blank"
               rel="noopener noreferrer"
               className="project-links"
