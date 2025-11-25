@@ -175,7 +175,8 @@ const Contact = () => {
             display: 'flex', 
             gap: '1.5rem', 
             justifyContent: 'center',
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            marginBottom: '3rem'
           }}
         >
           {socialLinks.map((social, index) => (
@@ -235,6 +236,149 @@ const Contact = () => {
               </motion.div>
             </motion.a>
           ))}
+        </motion.div>
+
+        {/* Resume Download Section */}
+        <motion.div
+          variants={itemVariants}
+          style={{
+            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15))',
+            padding: '2rem',
+            borderRadius: '20px',
+            border: '2px solid rgba(59, 130, 246, 0.4)',
+            textAlign: 'center',
+            marginTop: '2rem'
+          }}
+        >
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{
+              fontSize: '1.5rem',
+              marginBottom: '0.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '10px',
+              color: '#fff',
+              fontWeight: 'bold'
+            }}
+          >
+            📄 Download My Resume
+          </motion.h3>
+          <p style={{ marginBottom: '1.5rem', opacity: 0.9, fontSize: '0.95rem', color: '#fff' }}>
+            Choose the version that matches your interest
+          </p>
+          
+          <div style={{
+            display: 'flex',
+            gap: '1rem',
+            justifyContent: 'center',
+            flexWrap: 'wrap'
+          }}>
+            {[
+              { name: 'Cloud', icon: '☁️', color: '#3b82f6', file: '/resumes/SarangResume_Cloud.pdf' },
+              { name: 'SDE', icon: '💻', color: '#8b5cf6', file: '/resumes/SarangResume_SDE.pdf' },
+              { name: 'ML', icon: '🤖', color: '#10b981', file: '/resumes/SarangResume_ML.pdf' }
+            ].map((resume, index) => (
+              <motion.a
+                key={resume.name}
+                href={resume.file}
+                download
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, type: 'spring' }}
+                whileHover={{ scale: 1.1, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '1.2rem 1.8rem',
+                  background: `linear-gradient(135deg, ${resume.color}30, ${resume.color}20)`,
+                  border: `2px solid ${resume.color}`,
+                  borderRadius: '16px',
+                  cursor: 'pointer',
+                  textDecoration: 'none',
+                  color: '#fff',
+                  minWidth: '140px',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: `0 4px 15px ${resume.color}40`
+                }}
+              >
+                <motion.div
+                  animate={{
+                    rotate: [0, 5, -5, 0]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatDelay: 1
+                  }}
+                  style={{ fontSize: '2.5rem' }}
+                >
+                  {resume.icon}
+                </motion.div>
+                <span style={{
+                  fontWeight: '700',
+                  fontSize: '1rem',
+                  color: '#fff'
+                }}>
+                  {resume.name}
+                </span>
+                <span style={{
+                  fontSize: '0.75rem',
+                  opacity: 0.9,
+                  background: `${resume.color}50`,
+                  padding: '3px 10px',
+                  borderRadius: '10px',
+                  fontWeight: '600'
+                }}>
+                  📥 PDF
+                </span>
+                
+                {/* Animated background shine */}
+                <motion.div
+                  animate={{
+                    x: ['-100%', '100%']
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatDelay: 3
+                  }}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '50%',
+                    height: '100%',
+                    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)',
+                    pointerEvents: 'none'
+                  }}
+                />
+              </motion.a>
+            ))}
+          </div>
+          
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            style={{
+              marginTop: '1rem',
+              fontSize: '0.85rem',
+              opacity: 0.7,
+              color: '#fff'
+            }}
+          >
+            💡 Click to download instantly
+          </motion.p>
         </motion.div>
 
         {/* Fun floating elements */}

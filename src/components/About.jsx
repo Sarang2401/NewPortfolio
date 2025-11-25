@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, Award, BookOpen, Code, Laptop } from 'lucide-react';
+import { Calendar, MapPin, Award, Code, Laptop, Briefcase, Zap } from 'lucide-react';
 
 const About = () => {
   const [activeTimeline, setActiveTimeline] = useState(0);
@@ -11,87 +11,54 @@ const About = () => {
       title: 'Backend Intern(AWS)',
       company: 'EvolvingX Pvt. Ltd.',
       location: 'Remote',
-      description: 'Worked at the intersection of cloud technology and web development to build scalable, production-grade applications. Contributed to both frontend and backend ecosystems using React.js and Django, ensuring seamless user experiences and robust server-side logic.',
+      description: 'Built scalable cloud applications using React.js and Django, bridging students and colleges with modern tech solutions.',
       achievements: [
-        'Developed a first-of-its-kind platform to bridge the gap between students and colleges',
-        'Designed and implemented modern, responsive UI/UX patterns',
-        'Gained hands-on experience with cloud-native deployments and AWS services'
+        'First-of-its-kind student-college platform',
+        'Modern responsive UI/UX implementation',
+        'Cloud-native AWS deployments'
       ],
       type: 'internship',
-      color: '#3b82f6'
+      color: '#3b82f6',
+      icon: '☁️'
     },
     {
       year: '2024',
       title: 'Cybersecurity Intern',
       company: 'Cisco Virtual Internship',
       location: 'Virtual',
-      description: 'Focused on designing secure network architectures and conducting vulnerability assessments to evaluate and improve cybersecurity posture. Gained hands-on experience in both offensive and defensive security strategies, along with technical documentation practices.',
+      description: 'Designed secure network architectures and conducted vulnerability assessments to strengthen cybersecurity posture.',
       achievements: [
-        'Built a full-scale digital replica of college network infrastructure using Cisco tools',
-        'Implemented modern Switch and Routing protocols',
-        'Performed vulnerability assessments and documented security enhancements'
+        'Built full-scale college network replica',
+        'Implemented routing protocols',
+        'Performed security assessments'
       ],
       type: 'Intern',
-      color: '#8b5cf6'
+      color: '#8b5cf6',
+      icon: '🛡️'
     },
     {
       year: '2023',
       title: 'IoT and Automation',
       company: 'Team Achilles',
       location: 'Pune, India',
-      description: 'Embarked on my engineering journey with a focus on IoT and automation technologies, contributing to real-world automotive projects. Learned system integration, innovation workflows, and how to apply machine learning in embedded systems.',
+      description: 'Contributed to automotive IoT projects with ML-enhanced automation systems.',
       achievements: [
-        'Designed and developed two key subsystems for vehicle automation',
-        'Optimized existing architectures, resulting in 60% performance improvements',
-        'Introduced machine learning capabilities to enhance system intelligence and autonomy'
+        'Developed vehicle automation subsystems',
+        '60% performance optimization',
+        'ML integration for smart systems'
       ],
       type: 'Student Club',
-      color: '#10b981'
+      color: '#10b981',
+      icon: '🤖'
     },
   ];
 
   const stats = [
-    { label: 'Projects Completed', value: '10+', icon: '🚀' },
-    { label: 'Blog Posts Written', value: '25+', icon: '✍️' },
-    { label: 'CTFs Solved', value: '100+', icon: '🔐' },
-    { label: 'Years Of Experience', value: '1', icon: '⭐' }
+    { label: 'Projects', value: '10+', icon: '🚀', color: '#3b82f6' },
+    { label: 'Blog Posts', value: '25+', icon: '✍️', color: '#8b5cf6' },
+    { label: 'CTFs Solved', value: '100+', icon: '🔐', color: '#10b981' },
+    { label: 'Experience', value: '1 Yr', icon: '⭐', color: '#f59e0b' }
   ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15
-      }
-    }
-  };
 
   return (
     <motion.section
@@ -101,338 +68,340 @@ const About = () => {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
       className="about"
-      style={{ position: 'relative', overflow: 'hidden' }}
+      style={{ padding: '80px 0', position: 'relative', overflow: 'hidden' }}
     >
-      {/* Floating background elements */}
-      {[...Array(3)].map((_, i) => (
-        <motion.div
-          key={i}
-          animate={{
-            y: [0, -30, 0],
-            x: [0, i % 2 === 0 ? 20 : -20, 0],
-            scale: [1, 1.1, 1],
-            opacity: [0.05, 0.1, 0.05]
-          }}
-          transition={{
-            duration: 8 + i * 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: i * 0.5
-          }}
-          style={{
-            position: 'absolute',
-            width: '400px',
-            height: '400px',
-            borderRadius: '50%',
-            background: `radial-gradient(circle, ${timelineData[i]?.color || '#3b82f6'}40, transparent)`,
-            left: `${i * 35}%`,
-            top: `${i * 30}%`,
-            pointerEvents: 'none',
-            zIndex: 0
-          }}
-        />
-      ))}
+      {/* Animated background */}
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          rotate: [0, 90, 0],
+          opacity: [0.03, 0.05, 0.03]
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '800px',
+          height: '800px',
+          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent)',
+          pointerEvents: 'none'
+        }}
+      />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        {/* Header */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="about-content"
+          style={{ textAlign: 'center', marginBottom: '60px' }}
         >
-          <div className="about-header">
-            <motion.h2 variants={itemVariants}>About Me</motion.h2>
-            <motion.div 
-              variants={itemVariants} 
-              className="about-intro"
-              style={{ 
-                display: 'block',
-                position: 'relative',
-                padding: '3rem',
-                borderRadius: '20px',
-                border: '2px solid rgba(59, 130, 246, 0.3)',
-                background: 'rgba(59, 130, 246, 0.05)',
-                boxShadow: '0 10px 40px rgba(59, 130, 246, 0.1)'
+          <h1 style={{ marginBottom: '1rem' }}>About Me</h1>
+          <p style={{ fontSize: '1.2rem', opacity: 0.8, maxWidth: '700px', margin: '0 auto' }}>
+            SaaS Developer passionate about <span className="highlight">Cloud, Security & Innovation</span>
+          </p>
+        </motion.div>
+
+        {/* Quick Stats */}
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', 
+          gap: '1.5rem',
+          marginBottom: '60px'
+        }}>
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, type: 'spring' }}
+              whileHover={{ scale: 1.05, y: -5 }}
+              style={{
+                background: `linear-gradient(135deg, ${stat.color}20, ${stat.color}10)`,
+                padding: '1.5rem',
+                borderRadius: '16px',
+                border: `2px solid ${stat.color}40`,
+                textAlign: 'center',
+                cursor: 'pointer'
               }}
             >
-              {/* Large Laptop Background */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 0.06, scale: 1 }}
-                transition={{ duration: 1 }}
-                style={{
-                  position: 'absolute',
-                  left: '50%',
-                  top: '45%',
-                  transform: 'translate(-50%, -50%)',
-                  zIndex: 0,
-                  pointerEvents: 'none'
-                }}
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}
               >
-                <Laptop size={450} style={{ color: '#3b82f6' }} />
+                {stat.icon}
               </motion.div>
-
-              <div className="about-text" style={{ position: 'relative', zIndex: 1 }}>
-                <motion.p 
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '1.5rem' }}
-                >
-                  I am a dedicated <span className="highlight">SaaS Developer</span> passionate about creating secure, scalable digital solutions. My journey is driven by curiosity, creativity, and a commitment to excellence.
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '1.5rem' }}
-                >
-                  With expertise in Cloud Computing and CyberSecurity, I build efficient applications that solve real-world problems. I thrive in collaborative environments and enjoy mentoring fellow developers.
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  style={{ fontSize: '1.1rem', lineHeight: '1.8', marginBottom: '0' }}
-                >
-                  Welcome to my portfolio — where curiosity meets capability. 🚀
-                </motion.p>
-              </div>
+              <h3 style={{ fontSize: '2rem', margin: '0.5rem 0', color: stat.color }}>{stat.value}</h3>
+              <p style={{ opacity: 0.8, fontSize: '0.9rem' }}>{stat.label}</p>
             </motion.div>
-          </div>
+          ))}
+        </div>
 
-          {/* Stats Section with enhanced animations */}
-          <motion.div 
-            variants={containerVariants}
-            className="stats-grid"
-            style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-              gap: '1.5rem',
-              margin: '3rem 0'
-            }}
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={cardVariants}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -5,
-                  transition: { duration: 0.2 }
-                }}
-                className="stat-card"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1))',
-                  padding: '2rem',
-                  borderRadius: '16px',
-                  border: '1px solid rgba(59, 130, 246, 0.2)',
-                  textAlign: 'center',
-                  position: 'relative',
-                  overflow: 'hidden'
-                }}
-              >
-                <motion.div
-                  animate={{
-                    rotate: [0, 10, -10, 0],
-                    scale: [1, 1.1, 1]
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatDelay: 1
-                  }}
-                  style={{ fontSize: '3rem', marginBottom: '1rem' }}
-                >
-                  {stat.icon}
-                </motion.div>
-                <motion.h3
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ delay: index * 0.1 + 0.3, type: "spring" }}
-                  style={{ fontSize: '2.5rem', margin: '0.5rem 0', fontWeight: 'bold' }}
-                >
-                  {stat.value}
-                </motion.h3>
-                <p style={{ opacity: 0.8, fontSize: '0.95rem' }}>{stat.label}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Blog Writing Section */}
-          <motion.div 
-            variants={itemVariants} 
-            className="blog-section"
-            whileHover={{ scale: 1.02 }}
+        {/* Two Column Layout */}
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: '1fr 1fr', 
+          gap: '3rem',
+          marginBottom: '60px',
+          alignItems: 'start'
+        }}>
+          {/* Left: About Text */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
             style={{
-              background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1))',
-              padding: '2rem',
-              borderRadius: '16px',
-              border: '1px solid rgba(16, 185, 129, 0.2)',
-              marginBottom: '3rem'
+              background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.05))',
+              padding: '2.5rem',
+              borderRadius: '20px',
+              border: '2px solid rgba(59, 130, 246, 0.3)',
+              position: 'relative'
             }}
           >
-            <div className="blog-header" style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 0.05, scale: 1 }}
+              transition={{ duration: 1 }}
+              style={{
+                position: 'absolute',
+                right: '-10%',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                pointerEvents: 'none'
+              }}
+            >
+              <Laptop size={250} style={{ color: '#3b82f6' }} />
+            </motion.div>
+
+            <div style={{ position: 'relative', zIndex: 1 }}>
               <motion.div
-                animate={{ rotate: [0, 5, -5, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                style={{ marginBottom: '1.5rem' }}
               >
-                <BookOpen size={32} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1rem' }}>
+                  <Briefcase size={24} style={{ color: '#3b82f6' }} />
+                  <h3 style={{ margin: 0, fontSize: '1.5rem' }}>Who I Am</h3>
+                </div>
+                <p style={{ lineHeight: '1.8', opacity: 0.9 }}>
+                  A dedicated <span className="highlight">SaaS Developer</span> who builds secure, scalable solutions at the intersection of cloud and security.
+                </p>
               </motion.div>
-              <h3>Technical Blog Writer</h3>
-            </div>
-            <div className="blog-content">
-              <p>
-                I regularly write technical articles covering CyberSecurity, best practices, and emerging technologies. My blog posts have helped thousands of developers worldwide improve their skills and solve complex problems.
-              </p>
-              <div className="blog-topics" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '1rem' }}>
-                {['OWASP', 'Cloud Security', 'DevSecOps', 'CTF Walkthroughs'].map((topic, i) => (
-                  <motion.span
-                    key={topic}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: i * 0.1 }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    className="topic-tag"
-                    style={{
-                      padding: '0.5rem 1rem',
-                      borderRadius: '20px',
-                      background: 'rgba(59, 130, 246, 0.2)',
-                      border: '1px solid rgba(59, 130, 246, 0.3)',
-                      fontSize: '0.9rem',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {topic}
-                  </motion.span>
-                ))}
-              </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                style={{ marginBottom: '1.5rem' }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1rem' }}>
+                  <Zap size={24} style={{ color: '#f59e0b' }} />
+                  <h3 style={{ margin: 0, fontSize: '1.5rem' }}>What I Do</h3>
+                </div>
+                <p style={{ lineHeight: '1.8', opacity: 0.9 }}>
+                  Specialize in Cloud Computing, CyberSecurity, and DevOps. I thrive in collaborative environments and mentor developers.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  {['Cloud Security', 'DevSecOps', 'CTF Expert', 'Tech Writer'].map((tag, i) => (
+                    <motion.span
+                      key={tag}
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ delay: 0.5 + i * 0.1 }}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      style={{
+                        padding: '8px 16px',
+                        background: 'rgba(59, 130, 246, 0.2)',
+                        border: '1px solid rgba(59, 130, 246, 0.3)',
+                        borderRadius: '20px',
+                        fontSize: '0.85rem',
+                        fontWeight: '600',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {tag}
+                    </motion.span>
+                  ))}
+                </div>
+              </motion.div>
             </div>
           </motion.div>
 
-          {/* Professional Timeline */}
-          <motion.div variants={itemVariants} className="timeline-section">
-            <h3 style={{ marginBottom: '2rem' }}>Professional Journey</h3>
-            <div className="timeline-container">
-              <div className="timeline-nav" style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
-                {timelineData.map((item, index) => (
-                  <motion.button
-                    key={index}
-                    className={`timeline-nav-item ${activeTimeline === index ? 'active' : ''}`}
-                    onClick={() => setActiveTimeline(index)}
-                    whileHover={{ scale: 1.05, y: -3 }}
-                    whileTap={{ scale: 0.95 }}
-                    style={{
-                      padding: '1rem 1.5rem',
-                      borderRadius: '12px',
-                      border: `2px solid ${activeTimeline === index ? item.color : 'rgba(59, 130, 246, 0.3)'}`,
-                      background: activeTimeline === index 
-                        ? `linear-gradient(135deg, ${item.color}20, ${item.color}10)` 
-                        : 'transparent',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}
-                  >
-                    {activeTimeline === index && (
-                      <motion.div
-                        layoutId="activeTab"
-                        style={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          background: `${item.color}10`,
-                          zIndex: -1,
-                          borderRadius: '12px'
-                        }}
-                      />
-                    )}
-                    <div className="timeline-year" style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>{item.year}</div>
-                    <div className="timeline-type" style={{ fontSize: '0.85rem', opacity: 0.8 }}>{item.type}</div>
-                  </motion.button>
-                ))}
-              </div>
-              
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTimeline}
-                  initial={{ opacity: 0, x: 50, scale: 0.95 }}
-                  animate={{ opacity: 1, x: 0, scale: 1 }}
-                  exit={{ opacity: 0, x: -50, scale: 0.95 }}
-                  transition={{ duration: 0.4 }}
-                  className="timeline-content"
+          {/* Right: Timeline Preview */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h3 style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <Award size={24} style={{ color: '#10b981' }} />
+              Journey Timeline
+            </h3>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {timelineData.map((item, index) => (
+                <motion.button
+                  key={index}
+                  onClick={() => setActiveTimeline(index)}
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.15 }}
+                  whileHover={{ scale: 1.02, x: 5 }}
+                  whileTap={{ scale: 0.98 }}
                   style={{
-                    padding: '2rem',
+                    padding: '1.5rem',
                     borderRadius: '16px',
-                    border: `2px solid ${timelineData[activeTimeline].color}`,
-                    background: `linear-gradient(135deg, ${timelineData[activeTimeline].color}10, ${timelineData[activeTimeline].color}05)`,
-                    position: 'relative'
+                    border: `2px solid ${activeTimeline === index ? item.color : 'rgba(59, 130, 246, 0.2)'}`,
+                    background: activeTimeline === index 
+                      ? `linear-gradient(135deg, ${item.color}20, ${item.color}10)` 
+                      : 'rgba(59, 130, 246, 0.05)',
+                    cursor: 'pointer',
+                    textAlign: 'left',
+                    transition: 'all 0.3s ease',
+                    position: 'relative',
+                    overflow: 'hidden'
                   }}
                 >
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.02, 1],
-                      opacity: [0.5, 0.7, 0.5]
-                    }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                    style={{
-                      position: 'absolute',
-                      top: '10%',
-                      right: '5%',
-                      fontSize: '8rem',
-                      opacity: 0.05,
-                      pointerEvents: 'none'
-                    }}
-                  >
-                    {timelineData[activeTimeline].year}
-                  </motion.div>
-
-                  <div className="timeline-header" style={{ marginBottom: '1.5rem' }}>
-                    <h4 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>{timelineData[activeTimeline].title}</h4>
-                    <div className="timeline-meta" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', opacity: 0.9 }}>
-                      <div className="company" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <Award size={16} />
-                        {timelineData[activeTimeline].company}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', position: 'relative', zIndex: 1 }}>
+                    <motion.div
+                      animate={activeTimeline === index ? { rotate: [0, 10, -10, 0] } : {}}
+                      transition={{ duration: 0.5 }}
+                      style={{ fontSize: '2.5rem' }}
+                    >
+                      {item.icon}
+                    </motion.div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.25rem' }}>
+                        <span style={{ 
+                          fontSize: '1.2rem', 
+                          fontWeight: 'bold',
+                          color: item.color 
+                        }}>
+                          {item.year}
+                        </span>
+                        <span style={{ 
+                          fontSize: '0.75rem', 
+                          padding: '4px 8px',
+                          background: `${item.color}30`,
+                          borderRadius: '8px',
+                          fontWeight: '600'
+                        }}>
+                          {item.type}
+                        </span>
                       </div>
-                      <div className="location" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <MapPin size={16} />
-                        {timelineData[activeTimeline].location}
-                      </div>
-                      <div className="date" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <Calendar size={16} />
-                        {timelineData[activeTimeline].year}
-                      </div>
+                      <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '1.1rem', color: '#fff' }}>{item.title}</h4>
+                      <p style={{ margin: 0, fontSize: '0.9rem', opacity: 0.9, color: '#fff' }}>{item.company}</p>
                     </div>
                   </div>
-                  <p className="timeline-description" style={{ lineHeight: '1.8', marginBottom: '1.5rem' }}>
-                    {timelineData[activeTimeline].description}
-                  </p>
-                  <div className="achievements">
-                    <h5 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <Code size={20} /> Key Achievements:
-                    </h5>
-                    <ul style={{ lineHeight: '2', paddingLeft: '1.5rem' }}>
-                      {timelineData[activeTimeline].achievements.map((achievement, idx) => (
-                        <motion.li
-                          key={idx}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: idx * 0.1 }}
-                        >
-                          {achievement}
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+                </motion.button>
+              ))}
             </div>
           </motion.div>
-        </motion.div>
+        </div>
+
+        {/* Expanded Timeline Details */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTimeline}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.4 }}
+            style={{
+              padding: '2.5rem',
+              borderRadius: '20px',
+              border: `2px solid ${timelineData[activeTimeline].color}`,
+              background: `linear-gradient(135deg, ${timelineData[activeTimeline].color}15, ${timelineData[activeTimeline].color}05)`,
+              position: 'relative'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'start', gap: '2rem' }}>
+              <motion.div
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                style={{ fontSize: '4rem' }}
+              >
+                {timelineData[activeTimeline].icon}
+              </motion.div>
+              
+              <div style={{ flex: 1 }}>
+                <div style={{ marginBottom: '1rem' }}>
+                  <h3 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>
+                    {timelineData[activeTimeline].title}
+                  </h3>
+                  <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', opacity: 0.8, fontSize: '0.95rem' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <Award size={16} />
+                      {timelineData[activeTimeline].company}
+                    </span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <MapPin size={16} />
+                      {timelineData[activeTimeline].location}
+                    </span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <Calendar size={16} />
+                      {timelineData[activeTimeline].year}
+                    </span>
+                  </div>
+                </div>
+                
+                <p style={{ lineHeight: '1.8', marginBottom: '1.5rem', fontSize: '1.05rem' }}>
+                  {timelineData[activeTimeline].description}
+                </p>
+                
+                <div>
+                  <h4 style={{ 
+                    marginBottom: '1rem', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: '0.5rem',
+                    fontSize: '1.1rem'
+                  }}>
+                    <Code size={20} /> Key Achievements
+                  </h4>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {timelineData[activeTimeline].achievements.map((achievement, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.1 }}
+                        style={{
+                          padding: '12px 16px',
+                          background: 'rgba(255, 255, 255, 0.05)',
+                          borderRadius: '10px',
+                          borderLeft: `3px solid ${timelineData[activeTimeline].color}`,
+                          fontSize: '0.95rem'
+                        }}
+                      >
+                        ✓ {achievement}
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </motion.section>
   );
