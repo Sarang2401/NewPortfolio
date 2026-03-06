@@ -26,8 +26,8 @@ const App = () => {
           left: 0,
           top: 0,
           bottom: 0,
-          width: '4px',
-          background: 'linear-gradient(180deg, #3b82f6, #8b5cf6, #ec4899)',
+          width: '3px',
+          background: 'linear-gradient(180deg, #d4a853, #a07850, #8a7a6a)',
           transformOrigin: 'top',
           scaleY: scrollYProgress,
           zIndex: 9999
@@ -41,8 +41,8 @@ const App = () => {
           right: 0,
           top: 0,
           bottom: 0,
-          width: '4px',
-          background: 'linear-gradient(180deg, #ec4899, #8b5cf6, #3b82f6)',
+          width: '3px',
+          background: 'linear-gradient(180deg, #8a7a6a, #a07850, #d4a853)',
           transformOrigin: 'top',
           scaleY: scrollYProgress,
           zIndex: 9999

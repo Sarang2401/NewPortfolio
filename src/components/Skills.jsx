@@ -25,8 +25,7 @@ const Skills = () => {
   const skillCategories = [
     {
       title: 'Web Development',
-      icon: '🌐',
-      color: '#3b82f6',
+      color: '#d4a853',
       skills: [
         { name: 'React.js', level: 'Advanced' },
         { name: 'Flask', level: 'Advanced' },
@@ -35,8 +34,7 @@ const Skills = () => {
     },
     {
       title: 'CyberSecurity',
-      icon: '🔐',
-      color: '#8b5cf6',
+      color: '#a07850',
       skills: [
         { name: 'OWASP', level: 'Advanced' },
         { name: 'Network Security', level: 'Advanced' },
@@ -45,8 +43,7 @@ const Skills = () => {
     },
     {
       title: 'Cloud & DevOps',
-      icon: '☁️',
-      color: '#10b981',
+      color: '#8a7a6a',
       skills: [
         { name: 'AWS', level: 'Advanced' },
         { name: 'Docker', level: 'Advanced' },
@@ -56,8 +53,7 @@ const Skills = () => {
     },
     {
       title: 'Operating Systems',
-      icon: '💻',
-      color: '#f59e0b',
+      color: '#b89c70',
       skills: [
         { name: 'Linux', level: 'Advanced' },
         { name: 'Windows', level: 'Advanced' },
@@ -65,8 +61,7 @@ const Skills = () => {
     },
     {
       title: 'Development Tools',
-      icon: '🛠️',
-      color: '#ec4899',
+      color: '#c4a060',
       skills: [
         { name: 'Git', level: 'Expert' },
         { name: 'VS Code', level: 'Expert' },
@@ -81,16 +76,16 @@ const Skills = () => {
   ];
 
   const getLevelColor = (level) => {
-    switch(level) {
-      case 'Expert': return '#10b981';
-      case 'Advanced': return '#3b82f6';
-      case 'Intermediate': return '#f59e0b';
-      default: return '#6b7280';
+    switch (level) {
+      case 'Expert': return '#d4a853';
+      case 'Advanced': return '#b89c70';
+      case 'Intermediate': return '#a07850';
+      default: return '#6b6864';
     }
   };
 
   const getLevelStars = (level) => {
-    switch(level) {
+    switch (level) {
       case 'Expert': return 5;
       case 'Advanced': return 4;
       case 'Intermediate': return 3;
@@ -99,7 +94,7 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" ref={sectionRef} className="skills" style={{ padding: '80px 0' }}>
+    <section id="skills" ref={sectionRef} className="skills" style={{ padding: 'clamp(3rem, 6vw, 5rem) 0' }}>
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -107,86 +102,55 @@ const Skills = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h1 style={{ textAlign: 'center', marginBottom: '1rem' }}>
+          <h1 style={{
+            textAlign: 'center',
+            marginBottom: '0.75rem',
+            fontFamily: "'DM Serif Display', serif"
+          }}>
             My <span className="highlight">Skills</span>
           </h1>
-          <p style={{ 
-            textAlign: 'center', 
-            fontSize: '1.1rem', 
-            opacity: 0.8, 
-            marginBottom: '60px', 
-            maxWidth: '600px', 
-            margin: '0 auto 60px' 
+          <p style={{
+            textAlign: 'center',
+            fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
+            opacity: 0.7,
+            marginBottom: 'clamp(2rem, 5vw, 3.5rem)',
+            maxWidth: '550px',
+            margin: '0 auto clamp(2rem, 5vw, 3.5rem)'
           }}>
             A comprehensive overview of my technical expertise across different domains.
           </p>
         </motion.div>
 
-        {/* Main Skills Grid */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-          gap: '2rem',
-          marginBottom: '60px'
-        }}>
+        {/* Main Skills Grid — using responsive CSS class */}
+        <div className="skills-main-grid">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: categoryIndex * 0.1, duration: 0.5 }}
-              whileHover={{ scale: 1.03, y: -5 }}
+              transition={{ delay: categoryIndex * 0.08, duration: 0.5 }}
               style={{
-                background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.05))',
-                border: `2px solid ${category.color}40`,
-                borderRadius: '20px',
-                padding: '2rem',
+                background: `linear-gradient(135deg, ${category.color}10, ${category.color}05)`,
+                border: `1px solid ${category.color}25`,
+                borderRadius: '18px',
+                padding: 'clamp(1.25rem, 3vw, 2rem)',
                 position: 'relative',
                 overflow: 'hidden'
               }}
             >
-              {/* Background decoration */}
-              <motion.div
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.05, 0.1, 0.05]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                style={{
-                  position: 'absolute',
-                  top: '-50%',
-                  right: '-20%',
-                  width: '200px',
-                  height: '200px',
-                  background: `radial-gradient(circle, ${category.color}40, transparent)`,
-                  pointerEvents: 'none'
-                }}
-              />
-
               {/* Category Header */}
-              <div style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '12px',
-                marginBottom: '1.5rem',
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                marginBottom: '1.25rem',
                 position: 'relative',
                 zIndex: 1
               }}>
-                <motion.div
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  style={{ fontSize: '2rem' }}
-                >
-                  {category.icon}
-                </motion.div>
-                <h3 style={{ 
-                  fontSize: '1.4rem', 
-                  fontWeight: '700',
+                <h3 style={{
+                  fontFamily: "'DM Serif Display', serif",
+                  fontSize: 'clamp(1.1rem, 2.5vw, 1.3rem)',
                   margin: 0,
                   color: category.color
                 }}>
@@ -195,55 +159,54 @@ const Skills = () => {
               </div>
 
               {/* Skills List */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', position: 'relative', zIndex: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', position: 'relative', zIndex: 1 }}>
                 {category.skills.map((skill, index) => (
                   <motion.div
                     key={skill.name}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -15 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: categoryIndex * 0.1 + index * 0.1 }}
-                    whileHover={{ x: 5 }}
+                    transition={{ delay: categoryIndex * 0.08 + index * 0.08 }}
                     style={{
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      padding: '12px 16px',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      borderRadius: '12px',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      backdropFilter: 'blur(10px)'
+                      padding: '10px 14px',
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      borderRadius: '10px',
+                      border: '1px solid rgba(255, 255, 255, 0.05)',
                     }}
                   >
-                    <span style={{ fontWeight: '600', fontSize: '1rem' }}>
+                    <span style={{ fontWeight: '600', fontSize: 'clamp(0.85rem, 1.8vw, 1rem)' }}>
                       {skill.name}
                     </span>
-                    
-                    {/* Star Rating */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <div style={{ display: 'flex', gap: '2px' }}>
+
+                    {/* Star Rating + Level */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <div style={{ display: 'flex', gap: '1px' }}>
                         {[...Array(5)].map((_, i) => (
                           <motion.span
                             key={i}
                             initial={{ scale: 0 }}
                             whileInView={{ scale: 1 }}
-                            transition={{ delay: categoryIndex * 0.1 + index * 0.1 + i * 0.05 }}
+                            transition={{ delay: categoryIndex * 0.08 + index * 0.08 + i * 0.04 }}
                             style={{
-                              color: i < getLevelStars(skill.level) ? getLevelColor(skill.level) : '#374151',
-                              fontSize: '1rem'
+                              color: i < getLevelStars(skill.level) ? getLevelColor(skill.level) : '#2a2a35',
+                              fontSize: 'clamp(0.7rem, 1.5vw, 0.9rem)'
                             }}
                           >
                             ★
                           </motion.span>
                         ))}
                       </div>
-                      <span style={{ 
-                        fontSize: '0.8rem', 
+                      <span style={{
+                        fontSize: 'clamp(0.65rem, 1.2vw, 0.75rem)',
                         fontWeight: '600',
                         color: getLevelColor(skill.level),
-                        background: `${getLevelColor(skill.level)}20`,
-                        padding: '4px 8px',
-                        borderRadius: '6px'
+                        background: `${getLevelColor(skill.level)}18`,
+                        padding: '3px 7px',
+                        borderRadius: '5px',
+                        whiteSpace: 'nowrap'
                       }}>
                         {skill.level}
                       </span>
@@ -257,34 +220,31 @@ const Skills = () => {
 
         {/* Additional Skills Section */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           style={{
-            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1))',
-            border: '2px solid rgba(59, 130, 246, 0.3)',
-            borderRadius: '20px',
-            padding: '2rem',
+            marginTop: '2.5rem',
+            background: 'linear-gradient(135deg, rgba(212, 168, 83, 0.06), rgba(160, 120, 80, 0.04))',
+            border: '1px solid rgba(212, 168, 83, 0.15)',
+            borderRadius: '18px',
+            padding: 'clamp(1.25rem, 3vw, 2rem)',
             textAlign: 'center'
           }}
         >
-          <h3 style={{ 
-            fontSize: '1.5rem', 
-            marginBottom: '1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '10px'
+          <h3 style={{
+            fontFamily: "'DM Serif Display', serif",
+            fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
+            marginBottom: '1.25rem',
           }}>
-            <span>🚀</span>
             Additional Technologies & Tools
           </h3>
-          
-          <div style={{ 
-            display: 'flex', 
-            flexWrap: 'wrap', 
-            gap: '12px',
+
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '10px',
             justifyContent: 'center'
           }}>
             {additionalSkills.map((tech, index) => (
@@ -293,18 +253,20 @@ const Skills = () => {
                 initial={{ opacity: 0, scale: 0 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.1, y: -3 }}
+                transition={{ delay: index * 0.04 }}
+                whileHover={{ scale: 1.05, y: -2 }}
                 style={{
-                  padding: '12px 20px',
-                  background: 'rgba(59, 130, 246, 0.1)',
-                  border: '2px solid rgba(59, 130, 246, 0.3)',
+                  padding: '10px 18px',
+                  background: 'rgba(212, 168, 83, 0.06)',
+                  border: '1px solid rgba(212, 168, 83, 0.18)',
                   borderRadius: '25px',
-                  fontSize: '0.95rem',
+                  fontSize: 'clamp(0.8rem, 1.5vw, 0.9rem)',
                   fontWeight: '600',
-                  cursor: 'pointer',
-                  backdropFilter: 'blur(10px)',
-                  boxShadow: '0 4px 15px rgba(59, 130, 246, 0.2)'
+                  cursor: 'default',
+                  color: '#d4a853',
+                  minHeight: '40px',
+                  display: 'inline-flex',
+                  alignItems: 'center'
                 }}
               >
                 {tech}

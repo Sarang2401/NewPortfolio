@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import myImage from '../assets/SarangSS.jpg';
 
-
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
 
@@ -10,12 +9,10 @@ const Hero = () => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Calculate opacity based on scroll position (fades out after 300px)
   const backgroundOpacity = Math.max(0, 1 - scrollY / 300);
 
   return (
@@ -26,8 +23,8 @@ const Hero = () => {
       className="hero"
       style={{ position: 'relative', overflow: 'hidden' }}
     >
-      {/* Animated Background */}
-      <div 
+      {/* Subtle animated background */}
+      <div
         className="hero-background"
         style={{
           position: 'absolute',
@@ -45,7 +42,7 @@ const Hero = () => {
             backgroundPosition: ['0% 0%', '100% 100%'],
           }}
           transition={{
-            duration: 20,
+            duration: 25,
             repeat: Infinity,
             repeatType: 'reverse',
             ease: 'linear'
@@ -53,90 +50,35 @@ const Hero = () => {
           style={{
             width: '100%',
             height: '100%',
-            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(16, 185, 129, 0.08) 50%, rgba(99, 102, 241, 0.08) 100%)',
+            background: 'linear-gradient(135deg, rgba(212, 168, 83, 0.04) 0%, rgba(160, 120, 80, 0.03) 50%, rgba(212, 168, 83, 0.02) 100%)',
             backgroundSize: '200% 200%'
           }}
         />
-        
-        {/* DevOps Icons - Cloud, Docker, Kubernetes */}
-        {[
-          { icon: '☁️', size: 40, x: 10, y: 20 },
-          { icon: '🐳', size: 35, x: 80, y: 15 },
-          { icon: '⚙️', size: 30, x: 70, y: 70 },
-          { icon: '🔧', size: 28, x: 15, y: 75 },
-          { icon: '📦', size: 32, x: 85, y: 50 },
-          { icon: '🔄', size: 28, x: 45, y: 10 },
-        ].map((item, i) => (
-          <motion.div
-            key={`icon-${i}`}
-            animate={{
-              y: [0, -20, 0],
-              rotate: [0, 10, -10, 0],
-              opacity: [0.2, 0.4, 0.2]
-            }}
-            transition={{
-              duration: 4 + i * 0.5,
-              repeat: Infinity,
-              delay: i * 0.3,
-              ease: 'easeInOut'
-            }}
-            style={{
-              position: 'absolute',
-              left: `${item.x}%`,
-              top: `${item.y}%`,
-              fontSize: `${item.size}px`,
-            }}
-          >
-            {item.icon}
-          </motion.div>
-        ))}
 
-        {/* Data flow lines - representing CI/CD pipeline */}
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={`line-${i}`}
-            animate={{
-              x: [-100, window.innerWidth + 100],
-              opacity: [0, 0.3, 0]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              delay: i * 1.5,
-              ease: 'linear'
-            }}
-            style={{
-              position: 'absolute',
-              top: `${20 + i * 15}%`,
-              width: '100px',
-              height: '2px',
-              background: 'linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent)',
-            }}
-          />
-        ))}
-
-        {/* Floating code brackets and symbols */}
-        {['{ }', '</>', 'API', 'CI/CD', 'K8s'].map((text, i) => (
+        {/* Subtle floating text elements */}
+        {['Cloud', 'DevOps', 'Security', 'SaaS'].map((text, i) => (
           <motion.div
             key={`text-${i}`}
             animate={{
-              y: [0, -30, 0],
-              opacity: [0.15, 0.3, 0.15]
+              y: [0, -20, 0],
+              opacity: [0.04, 0.08, 0.04]
             }}
             transition={{
-              duration: 5 + i * 0.3,
+              duration: 6 + i * 0.5,
               repeat: Infinity,
-              delay: i * 0.4,
+              delay: i * 0.8,
               ease: 'easeInOut'
             }}
             style={{
               position: 'absolute',
-              left: `${(i * 18 + 5) % 95}%`,
-              top: `${(i * 23 + 30) % 80}%`,
-              fontSize: '14px',
-              fontFamily: 'monospace',
-              color: 'rgba(59, 130, 246, 0.4)',
-              fontWeight: 'bold'
+              left: `${(i * 22 + 8) % 90}%`,
+              top: `${(i * 20 + 15) % 75}%`,
+              fontSize: 'clamp(12px, 2vw, 16px)',
+              fontFamily: "'DM Serif Display', serif",
+              color: 'rgba(212, 168, 83, 0.15)',
+              fontWeight: '400',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase'
             }}
           >
             {text}
