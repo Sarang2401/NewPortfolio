@@ -1,122 +1,121 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import Magnetic from './Magnetic';
 import myImage from '../assets/SarangSS.jpg';
 
+const roles = ['AI Full-Stack Engineer', 'Python Backend Dev', 'AWS Architect', 'GenAI Builder'];
+
+// Split text utility for animation
+const SplitText = ({ text }) => {
+  return (
+    <>
+      {text.split(' ').map((word, i) => (
+        <span key={i} className="word">
+          <motion.span
+            initial={{ y: "100%" }}
+            whileInView={{ y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.6,
+              ease: [0.25, 1, 0.5, 1],
+              delay: i * 0.05
+            }}
+          >
+            {word}&nbsp;
+          </motion.span>
+        </span>
+      ))}
+    </>
+  );
+};
+
 const Hero = () => {
-  const [scrollY, setScrollY] = useState(0);
+  const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const interval = setInterval(() => {
+      setRoleIndex((current) => (current + 1) % roles.length);
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
-  const backgroundOpacity = Math.max(0, 1 - scrollY / 300);
-
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.7 }}
-      className="hero"
-      style={{ position: 'relative', overflow: 'hidden' }}
-    >
-      {/* Subtle animated background */}
-      <div
-        className="hero-background"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          opacity: backgroundOpacity,
-          zIndex: 0,
-          pointerEvents: 'none'
-        }}
-      >
-        <motion.div
-          animate={{
-            backgroundPosition: ['0% 0%', '100% 100%'],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            repeatType: 'reverse',
-            ease: 'linear'
-          }}
-          style={{
-            width: '100%',
-            height: '100%',
-            background: 'linear-gradient(135deg, rgba(212, 168, 83, 0.04) 0%, rgba(160, 120, 80, 0.03) 50%, rgba(212, 168, 83, 0.02) 100%)',
-            backgroundSize: '200% 200%'
-          }}
-        />
+    <section id="hero" className="hero">
+      <div className="hero-grid"></div>
 
-        {/* Subtle floating text elements */}
-        {['Cloud', 'DevOps', 'Security', 'SaaS'].map((text, i) => (
-          <motion.div
-            key={`text-${i}`}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.04, 0.08, 0.04]
-            }}
-            transition={{
-              duration: 6 + i * 0.5,
-              repeat: Infinity,
-              delay: i * 0.8,
-              ease: 'easeInOut'
-            }}
-            style={{
-              position: 'absolute',
-              left: `${(i * 22 + 8) % 90}%`,
-              top: `${(i * 20 + 15) % 75}%`,
-              fontSize: 'clamp(12px, 2vw, 16px)',
-              fontFamily: "'DM Serif Display', serif",
-              color: 'rgba(212, 168, 83, 0.15)',
-              fontWeight: '400',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase'
-            }}
+      <div className="container hero-content">
+        <div className="hero-layout">
+          <div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="availability-badge">
+                <span className="status-dot"></span>
+                Available for freelance
+              </div>
+            </motion.div>
+
+            <h1 className="hero-title">
+              <SplitText text="Building Systems That Scale." />
+            </h1>
+
+            <div className="hero-roles">
+              <span style={{ marginRight: '8px' }}>I'm a</span>
+              <div style={{ position: 'relative', flex: 1, height: '100%' }}>
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={roleIndex}
+                    initial={{ y: 20, opacity: 0, position: 'absolute' }}
+                    animate={{ y: 0, opacity: 1, position: 'relative' }}
+                    exit={{ y: -20, opacity: 0, position: 'absolute' }}
+                    transition={{ duration: 0.3 }}
+                    className="highlight"
+                  >
+                    {roles[roleIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+            </div>
+
+            <p className="hero-desc">
+              <SplitText text="I specialize in building AI-native applications using RAG pipelines, vector embeddings, and cloud-native architectures. Turning complex data into scalable, production-ready solutions." />
+            </p>
+
+            <motion.div 
+              className="hero-actions"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              <Magnetic strength={0.3}>
+                <a href="#projects" className="btn btn-primary">
+                  View My Work <ArrowRight size={18} />
+                </a>
+              </Magnetic>
+              <Magnetic strength={0.3}>
+                <a href="#contact" className="btn btn-outline">
+                  Let's Talk
+                </a>
+              </Magnetic>
+            </motion.div>
+          </div>
+
+          <motion.div 
+            className="portrait-container"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
           >
-            {text}
+            <div className="portrait-frame">
+              <img src={myImage} alt="Sarang Shigwan" loading="eager" />
+            </div>
           </motion.div>
-        ))}
-      </div>
-
-      <div className="container hero-grid" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="hero-text">
-          <motion.h1
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            Hi, I'm <span className="highlight">Sarang Shigwan</span>
-          </motion.h1>
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-          >
-            A passionate Software Developer.
-          </motion.p>
-          <motion.button
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.6, duration: 0.4, type: 'spring', stiffness: 100 }}
-            className="cta-button"
-            onClick={() => window.location.href = '#projects'}
-          >
-            View My Projects
-          </motion.button>
-        </div>
-        <div className="hero-image-frame">
-          <img src={myImage} alt="Portrait of Sarang Shigwan" />
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

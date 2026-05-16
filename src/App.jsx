@@ -1,92 +1,104 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
-import ProjectCard from './components/ProjectCard';
+import Projects from './components/Projects';
 import Contact from './components/Contact';
-import projectsData from './data/projects';
+import Cursor from './components/Cursor';
+import Lenis from 'lenis';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import './styles.css';
-import { motion, useScroll } from 'framer-motion';
 
 const App = () => {
   const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
 
   return (
-    <motion.div
-      className="app"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
-    >
-      {/* Left side scroll progress bar */}
+    <div className="app">
+      {/* Custom Blend-Mode Cursor */}
+      <Cursor />
+
+      {/* Top progress bar */}
       <motion.div
         style={{
           position: 'fixed',
-          left: 0,
           top: 0,
-          bottom: 0,
-          width: '3px',
-          background: 'linear-gradient(180deg, #d4a853, #a07850, #8a7a6a)',
-          transformOrigin: 'top',
-          scaleY: scrollYProgress,
+          left: 0,
+          right: 0,
+          height: '3px',
+          background: 'var(--text-primary)',
+          transformOrigin: '0%',
+          scaleX,
           zIndex: 9999
         }}
       />
 
-      {/* Right side scroll progress bar */}
-      <motion.div
-        style={{
-          position: 'fixed',
-          right: 0,
-          top: 0,
-          bottom: 0,
-          width: '3px',
-          background: 'linear-gradient(180deg, #8a7a6a, #a07850, #d4a853)',
-          transformOrigin: 'top',
-          scaleY: scrollYProgress,
-          zIndex: 9999
-        }}
-      />
+      {/* Floating Hire Me Badge */}
+      <a href="#contact" className="floating-badge">
+        <div className="badge-center"></div>
+        <svg viewBox="0 0 100 100" width="100" height="100" className="badge-text">
+          <defs>
+            <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
+          </defs>
+          <text fontSize="11" fontWeight="bold" fill="var(--text-secondary)" letterSpacing="1.5">
+            <textPath href="#circlePath">
+              • FREELANCE • AVAILABLE FOR WORK
+            </textPath>
+          </text>
+        </svg>
+      </a>
 
       <Navbar />
-      <Hero />
-      <About />
-      <Skills />
+      
+      <main>
+        <Hero />
+        <Projects />
+        <Skills />
+        <About />
+        <Contact />
+      </main>
 
-      <section id="projects" className="projects">
-        <div className="container">
-          <h2>Projects</h2>
-
-          {/* Display only the first 3 projects */}
-          <div className="projects-grid">
-            {projectsData.slice(0, 3).map((project, index) => (
-              <ProjectCard key={index} project={project} />
-            ))}
-          </div>
-
-          {/* View All Projects Button */}
-          <div className="view-all-projects">
-            <a
-              href="https://github.com/Sarang2401"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-links"
-            >
-              View All Projects on GitHub
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <Contact />
-
-      <footer>
-        <div className="container">
-          <p>Made with 💻,☕ and ❤️ by Sarang Shigwan</p>
+      <footer className="footer">
+        <div className="container footer-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', textAlign: 'center' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+            Made with 💻, ☕ and ❤️ by Sarang Shigwan
+          </p>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', opacity: 0.6 }}>
+            © {new Date().getFullYear()} All rights reserved.
+          </p>
         </div>
       </footer>
-    </motion.div>
+    </div>
   );
 };
 
