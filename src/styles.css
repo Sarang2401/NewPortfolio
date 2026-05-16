@@ -126,8 +126,14 @@ ul {
 }
 
 section {
-  padding: var(--space-2xl) 0;
+  padding: var(--space-xl) 0;
   position: relative;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding: var(--space-2xl) 0;
+  }
 }
 
 .highlight {
@@ -147,7 +153,7 @@ section {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 1rem 2rem;
+  padding: 0.875rem 1.75rem;
   border-radius: 999px;
   font-size: var(--text-base);
   font-weight: 600;
@@ -156,6 +162,7 @@ section {
   font-family: var(--font-body);
   position: relative;
   overflow: hidden;
+  min-height: 48px; /* touch-friendly */
 }
 
 .btn-primary {
@@ -403,6 +410,25 @@ section {
   text-transform: uppercase;
 }
 
+/* Hero Roles — ensure no overflow on small screens */
+.hero-roles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: var(--text-xl);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  min-height: 2rem;
+}
+
+@media (min-width: 768px) {
+  .hero-roles {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+}
+
 /* Word reveal utility */
 .word {
   display: inline-block;
@@ -414,11 +440,18 @@ section {
 }
 
 .hero-desc {
-  font-size: var(--text-xl);
+  font-size: var(--text-base);
   color: var(--text-secondary);
   max-width: 550px;
-  margin-bottom: 3rem;
-  line-height: 1.5;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .hero-desc {
+    font-size: var(--text-xl);
+    margin-bottom: 3rem;
+  }
 }
 
 .hero-actions {
@@ -427,13 +460,19 @@ section {
   gap: 1.5rem;
 }
 
-/* Hero Portrait */
+/* Portrait — smaller on mobile, auto max-width on desktop */
 .portrait-container {
   position: relative;
   width: 100%;
-  max-width: 450px;
+  max-width: 300px;
   aspect-ratio: 3/4;
   margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .portrait-container {
+    max-width: 450px;
+  }
 }
 
 .portrait-frame {
@@ -452,7 +491,13 @@ section {
 
 /* ===== Section Headers ===== */
 .section-header {
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-header {
+    margin-bottom: 4rem;
+  }
 }
 
 .section-label {
@@ -496,10 +541,16 @@ section {
 
 .project-panel-content {
   flex: 1;
-  padding: 3rem;
+  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .project-panel-content {
+    padding: 3rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -511,7 +562,13 @@ section {
 .project-panel-image {
   flex: 1;
   position: relative;
-  min-height: 300px;
+  min-height: 200px;
+}
+
+@media (min-width: 768px) {
+  .project-panel-image {
+    min-height: 300px;
+  }
 }
 
 .project-panel-image img {
@@ -748,8 +805,14 @@ section {
 }
 
 .about-text {
-  font-size: 1.25rem;
+  font-size: var(--text-base);
   color: var(--text-secondary);
+}
+
+@media (min-width: 768px) {
+  .about-text {
+    font-size: 1.25rem;
+  }
 }
 
 .about-text p {
@@ -759,10 +822,17 @@ section {
 .about-stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  margin-top: 3rem;
+  gap: 1.5rem;
+  margin-top: 2rem;
   border-top: 1px solid var(--border);
   padding-top: 2rem;
+}
+
+@media (min-width: 768px) {
+  .about-stats {
+    gap: 2rem;
+    margin-top: 3rem;
+  }
 }
 
 .stat-item {
@@ -889,12 +959,19 @@ section {
 }
 
 .contact-desc {
-  font-size: 1.25rem;
+  font-size: var(--text-base);
   color: var(--text-secondary);
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .contact-desc {
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+  }
 }
 
 .social-links {
