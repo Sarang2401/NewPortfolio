@@ -1,27 +1,30 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useInView } from 'framer-motion';
 
-// Split text utility for animation
-const SplitText = ({ text }) => {
+/* ── Animated counter that counts up on scroll ── */
+const AnimatedCounter = ({ to, suffix = '' }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-60px' });
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const duration = 1800;
+    const startTime = Date.now();
+    const tick = () => {
+      const progress = Math.min((Date.now() - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+      setValue(Math.round(eased * to));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, [isInView, to]);
+
   return (
-    <>
-      {text.split(' ').map((word, i) => (
-        <span key={i} className="word">
-          <motion.span
-            initial={{ y: "100%", opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{
-              duration: 0.5,
-              ease: [0.25, 1, 0.5, 1],
-              delay: i * 0.02
-            }}
-          >
-            {word}&nbsp;
-          </motion.span>
-        </span>
-      ))}
-    </>
+    <span ref={ref}>
+      {value}
+      <span style={{ color: 'var(--accent)' }}>{suffix}</span>
+    </span>
   );
 };
 
@@ -31,14 +34,21 @@ const About = () => {
       year: '2025',
       title: 'Backend Engineer Intern',
       company: 'EvolvingX Pvt. Ltd.',
-      description: 'Developed a full-stack web application (React + Django) with REST APIs. Deployed production systems on AWS EC2 and optimized backend efficiency.'
+      description:
+        'Developed a full-stack web application (React + Django) with REST APIs. Deployed production systems on AWS EC2 and optimized backend efficiency.',
     },
     {
       year: '2023',
       title: 'IoT & Automation Lead',
       company: 'Team Achilles',
-      description: 'Spearheaded the development of ML-enhanced vehicle automation subsystems, achieving 60% performance optimization in real-time data processing.'
-    }
+      description:
+        'Spearheaded the development of ML-enhanced vehicle automation subsystems, achieving 60% performance optimization in real-time data processing.',
+    },
+  ];
+
+  const stats = [
+    { to: 10, suffix: '+', label: 'Projects Built' },
+    { to: 100, suffix: '%', label: 'Automation Focus' },
   ];
 
   return (
@@ -48,7 +58,7 @@ const About = () => {
           className="section-header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
           <span className="section-label">Background</span>
@@ -61,41 +71,60 @@ const About = () => {
         <div className="about-grid">
           <div>
             <div className="about-text">
+              {/* Personality hook */}
+              <motion.p
+                className="about-hook"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.6 }}
+              >
+                I got into AI engineering because I wanted to build things that
+                actually <em>think</em>, not just CRUD apps that shuffle data around.
+                If a system can be intelligent, why shouldn't it be?
+              </motion.p>
+
               <p>
-                <SplitText text="I'm an AI Full-Stack Engineer focused on building intelligent, scalable systems that solve complex real-world problems. My expertise lies in designing robust Python backends (FastAPI/Django), deploying cloud-native architectures on AWS, and integrating Generative AI into enterprise workflows." />
+                I'm an AI Full-Stack Engineer focused on building intelligent, scalable
+                systems that solve complex real-world problems. My expertise lies in
+                designing robust Python backends (FastAPI/Django), deploying cloud-native
+                architectures on AWS, and integrating Generative AI into enterprise workflows.
               </p>
               <p>
-                <SplitText text="Whether it's building RAG pipelines, optimizing vector search embeddings, or designing zero-touch CI/CD deployments, I prioritize reliability and automation. I build systems that don't just work, they scale." />
+                Whether it's building RAG pipelines, optimizing vector search embeddings,
+                or designing zero-touch CI/CD deployments, I prioritize reliability and
+                automation. I build systems that don't just work. They scale.
               </p>
             </div>
 
+            {/* Animated stat counters */}
             <motion.div
               className="about-stats"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.5 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
             >
-              <div className="stat-item">
-                <div className="stat-value">10<span>+</span></div>
-                <div className="stat-label">High-Impact Projects</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-value">100<span>%</span></div>
-                <div className="stat-label">Automation Focus</div>
-              </div>
+              {stats.map((s) => (
+                <div className="stat-item" key={s.label}>
+                  <div className="stat-value">
+                    <AnimatedCounter to={s.to} suffix={s.suffix} />
+                  </div>
+                  <div className="stat-label">{s.label}</div>
+                </div>
+              ))}
             </motion.div>
           </div>
 
           <div className="timeline">
-            <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Experience</h3>
+            <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>Experience</h3>
             {timeline.map((item, idx) => (
               <motion.div
                 key={idx}
                 className="timeline-item"
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, delay: idx * 0.15 }}
               >
                 <div className="timeline-year">{item.year}</div>

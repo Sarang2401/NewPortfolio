@@ -6,6 +6,7 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Cursor from './components/Cursor';
+import Marquee from './components/Marquee';
 import Lenis from 'lenis';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import './styles.css';
@@ -82,6 +83,7 @@ const App = () => {
       
       <main>
         <Hero />
+        <Marquee />
         <Projects />
         <Skills />
         <About />

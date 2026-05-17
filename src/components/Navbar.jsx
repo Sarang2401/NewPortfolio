@@ -76,6 +76,16 @@ const Navbar = () => {
               );
             })}
             <Magnetic strength={0.2}>
+              <a
+                href="/resumes/SarangShigwan_AIFullstack.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nav-item"
+              >
+                Resume
+              </a>
+            </Magnetic>
+            <Magnetic strength={0.2}>
               <a href="#contact" onClick={(e) => handleNavClick(e, '#contact')} className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.85rem' }}>
                 Hire Me
               </a>
