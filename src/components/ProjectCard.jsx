@@ -10,13 +10,7 @@ const ProjectCard = ({ project, index }) => {
       ref={containerRef}
       className="project-sticky-container"
       style={{
-        position: 'sticky',
         top: `calc(10vh + ${index * 24}px)`,
-        height: '82vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginBottom: '4vh',
         zIndex: index + 1,
       }}
     >
@@ -26,17 +20,6 @@ const ProjectCard = ({ project, index }) => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
-        style={{
-          width: '100%',
-          height: '100%',
-          background: 'var(--surface)',
-          border: '1px solid var(--border)',
-          borderRadius: '24px',
-          overflow: 'hidden',
-          display: 'flex',
-          flexDirection: 'column',
-          boxShadow: '0 -20px 40px -20px rgba(0,0,0,0.8)',
-        }}
       >
         <div className="project-panel-inner">
 
