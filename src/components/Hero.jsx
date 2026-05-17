@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Magnetic from './Magnetic';
@@ -6,15 +6,78 @@ import myImage from '../assets/SarangSS.jpg';
 
 const roles = ['AI Full-Stack Engineer', 'Python Backend Dev', 'AWS Architect', 'GenAI Builder'];
 
-/* ── Mouse-tracking tilt for the portrait ── */
+/* ── Scramble hook: randomises chars before settling ── */
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&';
+function useScramble(target, active) {
+  const [display, setDisplay] = useState(target);
+  const frame = useRef(0);
+  const raf   = useRef(null);
+
+  useEffect(() => {
+    if (!active) { setDisplay(target); return; }
+    let iter = 0;
+    const total = target.length * 2.5;
+    cancelAnimationFrame(raf.current);
+
+    const tick = () => {
+      setDisplay(
+        target
+          .split('')
+          .map((ch, i) => {
+            if (i < iter / 2.5) return ch;
+            if (ch === ' ')     return ' ';
+            return CHARS[Math.floor(Math.random() * CHARS.length)];
+          })
+          .join('')
+      );
+      iter++;
+      if (iter <= total) raf.current = requestAnimationFrame(tick);
+      else               setDisplay(target);
+    };
+    raf.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf.current);
+  }, [target, active]);
+
+  return display;
+}
+
+/* ── Aurora Orb background ── */
+const AuroraBackground = () => {
+  const containerRef = useRef(null);
+
+  const handleMouseMove = useCallback((e) => {
+    if (!containerRef.current) return;
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    const dx = (clientX / innerWidth  - 0.5) * 30;
+    const dy = (clientY / innerHeight - 0.5) * 20;
+    containerRef.current.style.transform = `translate(${dx}px, ${dy}px)`;
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [handleMouseMove]);
+
+  return (
+    <div className="hero-aurora">
+      <div
+        ref={containerRef}
+        style={{ position: 'absolute', inset: '-5%', transition: 'transform 0.8s cubic-bezier(0.25,1,0.5,1)' }}
+      >
+        <div className="aurora-orb aurora-orb-1" />
+        <div className="aurora-orb aurora-orb-2" />
+        <div className="aurora-orb aurora-orb-3" />
+      </div>
+    </div>
+  );
+};
+
+/* ── Mouse-tracking tilt portrait ── */
 const TiltPortrait = () => {
   const ref = useRef(null);
-
-  // Raw mouse position relative to portrait center
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-
-  // Springs for silky smooth response
   const springCfg = { damping: 20, stiffness: 150 };
   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]),  springCfg);
   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), springCfg);
@@ -27,11 +90,7 @@ const TiltPortrait = () => {
     mouseX.set((e.clientX - rect.left) / rect.width  - 0.5);
     mouseY.set((e.clientY - rect.top)  / rect.height - 0.5);
   };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
+  const handleMouseLeave = () => { mouseX.set(0); mouseY.set(0); };
 
   return (
     <motion.div
@@ -39,30 +98,17 @@ const TiltPortrait = () => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className="portrait-wrapper"
-      /* Entry: slide in from right, already tilted */
       initial={{ opacity: 0, x: 60, rotate: -6 }}
       animate={{ opacity: 1, x: 0, rotate: -4 }}
       transition={{ duration: 1.1, delay: 0.3, ease: [0.25, 1, 0.5, 1] }}
-      style={{
-        /* Persistent slight tilt — straightens on hover via rotateY */
-        perspective: 800,
-        transformStyle: 'preserve-3d',
-      }}
+      style={{ perspective: 800, transformStyle: 'preserve-3d' }}
     >
-      {/* 3-D tilt inner */}
-      <motion.div
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: 'preserve-3d',
-        }}
-      >
-        {/* Floating animation wrapper */}
+      <motion.div style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}>
         <motion.div
           animate={{ y: [0, -12, 0] }}
           transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
         >
-          {/* Glow ring — shifts with mouse */}
+          {/* Glow ring — violet/cyan gradient */}
           <motion.div
             className="portrait-glow-ring"
             style={{
@@ -73,18 +119,10 @@ const TiltPortrait = () => {
               ),
             }}
           />
-
-          {/* Photo frame */}
           <div className="portrait-frame-premium">
-            <img
-              src={myImage}
-              alt="Sarang Shigwan — AI Full-Stack Engineer"
-              loading="eager"
-            />
+            <img src={myImage} alt="Sarang Shigwan — AI Full-Stack Engineer" loading="eager" />
             <div className="portrait-blend-overlay" />
             <div className="portrait-vignette" />
-
-            {/* Shimmer highlight that follows mouse */}
             <motion.div
               className="portrait-shimmer"
               style={{
@@ -102,39 +140,49 @@ const TiltPortrait = () => {
   );
 };
 
+/* ── Scrambling role badge ── */
+const ScrambleRole = ({ text }) => {
+  const [active, setActive] = useState(false);
+  const displayed = useScramble(text, active);
+
+  useEffect(() => {
+    setActive(true);
+    const t = setTimeout(() => setActive(false), text.length * 35 + 400);
+    return () => clearTimeout(t);
+  }, [text]);
+
+  return <span className="highlight">{displayed}</span>;
+};
+
 const Hero = () => {
   const [roleIndex, setRoleIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setRoleIndex((c) => (c + 1) % roles.length);
-    }, 3000);
+    }, 3200);
     return () => clearInterval(interval);
   }, []);
 
-  const containerVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.15 } },
-  };
-
+  const containerVariants = { hidden: {}, visible: { transition: { staggerChildren: 0.15 } } };
   const itemVariants = {
-    hidden:   { opacity: 0, y: 28 },
-    visible:  { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.25, 1, 0.5, 1] } },
+    hidden:  { opacity: 0, y: 28 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.25, 1, 0.5, 1] } },
   };
 
   return (
     <section id="hero" className="hero">
+      {/* Aurora orbs */}
+      <AuroraBackground />
+
+      {/* Violet-tinted dot grid */}
       <div className="hero-grid" />
 
       <div className="container hero-content">
         <div className="hero-layout">
 
           {/* ── Left: Text ── */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
+          <motion.div variants={containerVariants} initial="hidden" animate="visible">
             <motion.div variants={itemVariants}>
               <div className="availability-badge">
                 <span className="status-dot" />
@@ -155,10 +203,9 @@ const Hero = () => {
                     initial={{ y: 20, opacity: 0, position: 'absolute' }}
                     animate={{ y: 0, opacity: 1, position: 'relative' }}
                     exit={{ y: -20, opacity: 0, position: 'absolute' }}
-                    transition={{ duration: 0.3 }}
-                    className="highlight"
+                    transition={{ duration: 0.25 }}
                   >
-                    {roles[roleIndex]}
+                    <ScrambleRole text={roles[roleIndex]} />
                   </motion.span>
                 </AnimatePresence>
               </div>
