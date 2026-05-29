@@ -77,7 +77,7 @@ const Navbar = () => {
             })}
             <Magnetic strength={0.2}>
               <a
-                href="/resumes/SarangShigwan_AIFullstack.pdf"
+                href="/resumes/SarangShigwan_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="nav-item"

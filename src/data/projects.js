@@ -5,26 +5,26 @@ import ResponseForge from '../assets/ResponseForge.png';
 const projects = [
   {
     name: 'TraceLens',
-    category: 'AI / Observability',
-    tagline: 'AI-powered root cause analysis using RAG and vector search.',
+    category: 'Observability / Systems',
+    tagline: 'Root cause analysis tool for distributed system failures.',
     description:
-      'Built a RAG pipeline with vector embeddings to analyze distributed system failures. Designed a FastAPI-based microservice deployed on AWS Lambda for scalable, stateless inference. Implemented vector similarity search with cosine scoring to identify failure patterns.',
-    outcomes: ['Automated debugging', 'Serverless AWS deployment', 'High-confidence AI scoring'],
-    tech: ['FastAPI', 'AWS Lambda', 'Sentence-Transformers', 'RAG', 'Vector Search'],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop', // Data visualization placeholder
-    githubLink: 'https://github.com/Sarang2401', // Replace with actual link
+      'Built a failure analysis pipeline using vector embeddings to correlate distributed system logs and surface recurring failure patterns. Deployed as a FastAPI microservice on AWS Lambda for stateless, scalable inference, with cosine similarity scoring to rank potential root causes.',
+    outcomes: ['Automated debugging', 'Serverless AWS deployment', 'Similarity-based scoring'],
+    tech: ['FastAPI', 'AWS Lambda', 'Sentence-Transformers', 'PostgreSQL', 'Vector Search'],
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop',
+    githubLink: 'https://github.com/Sarang2401',
     featured: true,
   },
   {
     name: 'LexVault',
-    category: 'Full-Stack / GenAI',
-    tagline: 'Smart Legal Document Manager with AI-based search.',
+    category: 'Full-Stack / Document Intelligence',
+    tagline: 'Legal document manager with semantic search capabilities.',
     description:
-      'Engineered a document intelligence system featuring rigorous version tracking and audit history. Designed a complex PostgreSQL schema for efficient retrieval. Built out REST APIs with a React dashboard, establishing the foundation for embedding-based semantic search.',
+      'Engineered a document management system with version tracking, audit history, and a complex PostgreSQL schema for efficient retrieval. Built REST APIs and a React dashboard, with the backend wired for embedding-based semantic search on document content.',
     outcomes: ['Full audit history', 'Complex Relational Schema', 'React + FastAPI Stack'],
     tech: ['React', 'FastAPI', 'PostgreSQL', 'Embeddings', 'REST APIs'],
-    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1000&auto=format&fit=crop', // Law/document placeholder
-    githubLink: 'https://github.com/Sarang2401', // Replace with actual link
+    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1000&auto=format&fit=crop',
+    githubLink: 'https://github.com/Sarang2401',
     featured: false,
   },
   {
@@ -66,10 +66,10 @@ const projects = [
   {
     name: 'Response Forge',
     category: 'GRC Automation',
-    tagline: 'AI-generated incident response plans in minutes.',
+    tagline: 'Auto-generate NIST-aligned incident response plans.',
     description:
-      'Streamlines Governance, Risk & Compliance operations by auto-generating NIST 800-series aligned Incident Response plans. Reduces compliance planning time from weeks to minutes, producing audit-ready playbooks at scale.',
-    outcomes: ['NIST 800 aligned output', 'Minutes vs weeks planning time', 'Audit-ready PDFs'],
+      'Streamlines Governance, Risk & Compliance operations by generating NIST 800-series aligned Incident Response plans from structured inputs. Reduces compliance planning time significantly, producing audit-ready playbooks as PDF exports.',
+    outcomes: ['NIST 800 aligned output', 'Faster planning cycles', 'Audit-ready PDFs'],
     tech: ['Python', 'LLM Integration', 'FastAPI', 'React', 'NIST Framework'],
     image: ResponseForge,
     githubLink: 'https://github.com/Sarang2401/ResponseForge',

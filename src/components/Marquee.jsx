@@ -1,9 +1,9 @@
 import React from 'react';
 
 const items = [
-  'FastAPI', 'AWS Lambda', 'RAG Pipelines', 'Vector Search',
-  'Python', 'CI/CD', 'LLMs', 'Docker', 'Kubernetes', 'GenAI',
-  'System Design', 'PostgreSQL',
+  'FastAPI', 'AWS Lambda', 'Python', 'CI/CD',
+  'Docker', 'Kubernetes', 'Go', 'Terraform',
+  'System Design', 'PostgreSQL', 'Grafana', 'REST APIs',
 ];
 
 const Marquee = () => {

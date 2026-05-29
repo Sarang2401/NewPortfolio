@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import Magnetic from './Magnetic';
 import myImage from '../assets/SarangSS.jpg';
 
-const roles = ['AI Full-Stack Engineer', 'Python Backend Dev', 'AWS Architect', 'GenAI Builder'];
+const roles = ['Full-Stack Engineer', 'Python Backend Dev', 'AWS Cloud Architect', 'Systems Builder'];
 
 /* ── Scramble hook: randomises chars before settling ── */
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&';
@@ -120,7 +120,7 @@ const TiltPortrait = () => {
             }}
           />
           <div className="portrait-frame-premium">
-            <img src={myImage} alt="Sarang Shigwan — AI Full-Stack Engineer" loading="eager" />
+            <img src={myImage} alt="Sarang Shigwan — Full-Stack & Cloud Engineer" loading="eager" />
             <div className="portrait-blend-overlay" />
             <div className="portrait-vignette" />
             <motion.div
@@ -212,9 +212,9 @@ const Hero = () => {
             </motion.div>
 
             <motion.p className="hero-desc" variants={itemVariants}>
-              I specialize in building AI-native applications using RAG pipelines,
-              vector embeddings, and cloud-native architectures. Turning complex data
-              into scalable, production-ready solutions.
+              I build reliable, production-grade systems — from Python backends
+              and cloud infrastructure on AWS to full-stack web apps. I care
+              about clean architecture, automation, and software that actually scales.
             </motion.p>
 
             <motion.div className="hero-actions" variants={itemVariants}>

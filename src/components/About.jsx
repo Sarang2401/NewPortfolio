@@ -47,8 +47,8 @@ const About = () => {
   ];
 
   const stats = [
-    { to: 10, suffix: '+', label: 'Projects Built' },
-    { to: 100, suffix: '%', label: 'Automation Focus' },
+    { to: 10, suffix: '+', label: 'Projects Shipped' },
+    { to: 2, suffix: '+', label: 'Years of Experience' },
   ];
 
   return (
@@ -79,21 +79,22 @@ const About = () => {
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6 }}
               >
-                I got into AI engineering because I wanted to build things that
-                actually <em>think</em>, not just CRUD apps that shuffle data around.
-                If a system can be intelligent, why shouldn't it be?
+                I care about building software that holds up in production —
+                systems that don't fall over under load and are easy to reason
+                about when something does go wrong.
               </motion.p>
 
               <p>
-                I'm an AI Full-Stack Engineer focused on building intelligent, scalable
-                systems that solve complex real-world problems. My expertise lies in
-                designing robust Python backends (FastAPI/Django), deploying cloud-native
-                architectures on AWS, and integrating Generative AI into enterprise workflows.
+                I'm a Full-Stack Engineer focused on building scalable,
+                maintainable systems end-to-end. My work spans Python backends
+                (FastAPI/Django), cloud infrastructure on AWS, and modern
+                React frontends — with a strong emphasis on DevOps and automation.
               </p>
               <p>
-                Whether it's building RAG pipelines, optimizing vector search embeddings,
-                or designing zero-touch CI/CD deployments, I prioritize reliability and
-                automation. I build systems that don't just work. They scale.
+                Whether it's designing CI/CD pipelines, containerizing services
+                with Docker &amp; Kubernetes, or building production APIs, I
+                prioritize reliability and clean architecture. I build systems that
+                don't just work — they scale.
               </p>
             </div>
 

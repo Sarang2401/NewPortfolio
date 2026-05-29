@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const categories = [
   {
-    id: 'genai',
-    title: 'Generative AI & LLMs',
-    description: 'Building AI-native applications and intelligent retrieval systems. Designing RAG pipelines, optimizing vector search embeddings, and deploying scalable inference endpoints.',
-    skills: ['RAG Pipelines', 'Vector Embeddings', 'Semantic Search', 'Sentence-Transformers'],
+    id: 'mlai',
+    title: 'ML & Intelligent Systems',
+    description: 'Integrating machine learning models into production systems. Building semantic search, document intelligence, and LLM-powered workflows that solve real engineering problems.',
+    skills: ['Sentence-Transformers', 'Semantic Search', 'LLM APIs', 'FastAPI Inference'],
     image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop'
   },
   {
@@ -19,7 +19,7 @@ const categories = [
   {
     id: 'software',
     title: 'Software Engineering',
-    description: 'Architecting robust Python backends and scalable full-stack systems. Specializing in low-latency APIs, distributed architectures, and dynamic React frontends.',
+    description: 'Building robust Python backends and full-stack systems end-to-end. Specializing in low-latency APIs, clean service boundaries, and dynamic React frontends.',
     skills: ['Python (FastAPI/Django)', 'React Ecosystem', 'PostgreSQL', 'System Architecture'],
     image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop'
   }
