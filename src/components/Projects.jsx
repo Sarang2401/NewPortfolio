@@ -1,19 +1,17 @@
-import React, { useRef } from 'react';
-import { motion, useScroll } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import projectsData from '../data/projects';
 import ProjectCard from './ProjectCard';
 
 const Projects = () => {
-  const containerRef = useRef(null);
-
   return (
-    <section id="projects" className="projects-section" ref={containerRef} style={{ position: 'relative' }}>
+    <section id="projects" className="projects-section">
       <div className="container">
-        <motion.div 
+        <motion.div
           className="section-header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
           <span className="section-label">Selected Work</span>
@@ -22,12 +20,12 @@ const Projects = () => {
           </h2>
         </motion.div>
 
-        <div className="projects-stack-container" style={{ marginTop: '4rem', paddingBottom: '10vh' }}>
+        <div className="projects-stack-container">
           {projectsData.map((project, index) => (
-            <ProjectCard 
-              key={index} 
-              project={project} 
-              index={index} 
+            <ProjectCard
+              key={index}
+              project={project}
+              index={index}
             />
           ))}
         </div>

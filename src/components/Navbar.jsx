@@ -12,7 +12,7 @@ const Navbar = () => {
       setScrolled(window.scrollY > 50);
 
       const sections = ['hero', 'projects', 'skills', 'about', 'contact'];
-      const current = sections.find(section => {
+      const current = sections.find((section) => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
@@ -29,8 +29,8 @@ const Navbar = () => {
 
   const navItems = [
     { name: 'Work', href: '#projects' },
-    { name: 'Expertise', href: '#skills' },
-    { name: 'About', href: '#about' }
+    { name: 'Skills', href: '#skills' },
+    { name: 'About', href: '#about' },
   ];
 
   const handleNavClick = (e, href) => {
@@ -48,7 +48,7 @@ const Navbar = () => {
         <div className="container nav-content">
           <Magnetic strength={0.1}>
             <a href="#hero" onClick={(e) => handleNavClick(e, '#hero')} className="logo">
-              Sarang<span className="logo-dot"></span>
+              Sarang<span className="logo-dot" />
             </a>
           </Magnetic>
 
@@ -86,7 +86,12 @@ const Navbar = () => {
               </a>
             </Magnetic>
             <Magnetic strength={0.2}>
-              <a href="#contact" onClick={(e) => handleNavClick(e, '#contact')} className="btn btn-primary" style={{ padding: '0.5rem 1.25rem', fontSize: '0.85rem' }}>
+              <a
+                href="#contact"
+                onClick={(e) => handleNavClick(e, '#contact')}
+                className="btn btn-primary"
+                style={{ padding: '0.5rem 1.25rem', fontSize: '0.85rem' }}
+              >
                 Hire Me
               </a>
             </Magnetic>
@@ -97,8 +102,8 @@ const Navbar = () => {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle navigation menu"
           >
-            <span></span>
-            <span style={{ width: menuOpen ? '24px' : '16px' }}></span>
+            <span />
+            <span style={{ width: menuOpen ? '24px' : '16px' }} />
           </button>
         </div>
       </nav>
@@ -120,7 +125,7 @@ const Navbar = () => {
                 className={`mobile-nav-item ${activeSection === item.href.slice(1) ? 'active' : ''}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: i * 0.08 }}
               >
                 {item.name}
               </motion.a>
@@ -131,7 +136,7 @@ const Navbar = () => {
               className="btn btn-primary"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navItems.length * 0.1 }}
+              transition={{ delay: navItems.length * 0.08 }}
             >
               Let's Talk
             </motion.a>

@@ -1,13 +1,28 @@
 const skills = [
-    'React.js',
-    'JavaScript (ES6+)',
-    'HTML',
-    'CSS',
-    'Node.js',
-    'Express.js',
-    'Git',
-    'Responsive Design',
-    // Add more skills
-  ];
-  
-  export default skills;
+  'AWS',
+  'Docker',
+  'Kubernetes',
+  'React',
+  'Python',
+  'FastAPI',
+  'Django',
+  'Java',
+  'PostgreSQL',
+  'MySQL',
+  'GitHub Actions',
+  'Terraform',
+  'Linux',
+  'Cybersecurity',
+  'Go',
+  'Prometheus',
+  'Grafana',
+  'OWASP',
+  'Redis',
+  'Nginx',
+  'TypeScript',
+  'Ansible',
+  'CI/CD',
+  'System Design',
+];
+
+export default skills;

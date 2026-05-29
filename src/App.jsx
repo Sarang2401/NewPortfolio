@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Cursor from './components/Cursor';
 import Marquee from './components/Marquee';
+import EngineeringHighlights from './components/EngineeringHighlights';
 import Lenis from 'lenis';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import './styles.css';
@@ -16,7 +17,7 @@ const App = () => {
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   useEffect(() => {
@@ -49,49 +50,60 @@ const App = () => {
       {/* Custom Blend-Mode Cursor */}
       <Cursor />
 
-      {/* Top progress bar */}
+      {/* Scroll progress bar */}
       <motion.div
         style={{
           position: 'fixed',
           top: 0,
           left: 0,
           right: 0,
-          height: '3px',
-          background: 'var(--text-primary)',
+          height: '2px',
+          background: 'var(--accent)',
           transformOrigin: '0%',
           scaleX,
-          zIndex: 9999
+          zIndex: 9999,
         }}
       />
 
       {/* Floating Hire Me Badge */}
       <a href="#contact" className="floating-badge">
-        <div className="badge-center"></div>
+        <div className="badge-center" />
         <svg viewBox="0 0 100 100" width="100" height="100" className="badge-text">
           <defs>
-            <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
+            <path
+              id="circlePath"
+              d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"
+            />
           </defs>
           <text fontSize="11" fontWeight="bold" fill="var(--text-secondary)" letterSpacing="1.5">
-            <textPath href="#circlePath">
-              • FREELANCE • AVAILABLE FOR WORK
-            </textPath>
+            <textPath href="#circlePath">• FREELANCE • AVAILABLE FOR WORK</textPath>
           </text>
         </svg>
       </a>
 
       <Navbar />
-      
+
       <main>
         <Hero />
         <Marquee />
         <Projects />
+        <EngineeringHighlights />
         <Skills />
         <About />
         <Contact />
       </main>
 
       <footer className="footer">
-        <div className="container footer-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', textAlign: 'center' }}>
+        <div
+          className="container footer-content"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '1rem',
+            textAlign: 'center',
+          }}
+        >
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
             Made with 💻, ☕ and ❤️ by Sarang Shigwan
           </p>
