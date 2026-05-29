@@ -2710,3 +2710,102 @@ section {
   background: linear-gradient(to right, var(--bg) 0%, transparent 40%);
   pointer-events: none;
 }
+
+/* ===== Bento Grid (Skills Section) ===== */
+.skills-section {
+  padding: var(--space-2xl) 0;
+  border-top: 1px solid var(--border);
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.bento-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  border-color: rgba(204, 255, 0, 0.25);
+  background: var(--surface-2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}
+
+.bento-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bento-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--accent);
+  transition: all 0.3s ease;
+}
+
+.bento-card:hover .bento-icon-wrapper {
+  background: rgba(204, 255, 0, 0.08);
+  border-color: rgba(204, 255, 0, 0.3);
+  color: var(--accent);
+  transform: scale(1.05);
+}
+
+.bento-card-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.bento-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.bento-skill-pill {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  transition: all 0.25s ease;
+  cursor: default;
+}
+
+.bento-skill-pill:hover {
+  color: #000000;
+  background: var(--accent);
+  border-color: var(--accent);
+}
