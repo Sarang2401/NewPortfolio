@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { Trophy, Award } from 'lucide-react';
 
 const AnimatedCounter = ({ to, suffix = '' }) => {
   const ref = useRef(null);
@@ -50,6 +51,21 @@ const stats = [
   { to: 1, suffix: '', label: 'IEEE Publication' },
 ];
 
+const achievements = [
+  {
+    id: '01',
+    title: 'IEEE RESEARCH PRESENTER',
+    description: 'Presented research work at an international IEEE conference, showcasing innovation, technical depth, and problem-solving ability through applied engineering research.',
+    icon: <Award size={24} className="achievement-icon-svg" />
+  },
+  {
+    id: '02',
+    title: 'HACKATHON FINALIST & WINNER',
+    description: 'Built innovative solutions under high-pressure environments, collaborating with teams to solve real-world problems across AI, cloud, and cybersecurity domains.',
+    icon: <Trophy size={24} className="achievement-icon-svg" />
+  }
+];
+
 export default function About() {
   return (
     <section id="about" className="experience-section">
@@ -86,31 +102,68 @@ export default function About() {
           ))}
         </motion.div>
 
-        {/* Timeline */}
-        <div className="experience-timeline">
-          {timeline.map((item, idx) => (
-            <motion.div
-              key={idx}
-              className="experience-item"
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
-            >
-              <div className="experience-year-col">
-                <span className="experience-year">{item.year}</span>
-              </div>
-              <div className="experience-connector">
-                <div className="experience-dot" />
-                <div className="experience-line" />
-              </div>
-              <div className="experience-content">
-                <h4 className="experience-role">{item.title}</h4>
-                <p className="experience-company">{item.company}</p>
-                <p className="experience-desc">{item.description}</p>
-              </div>
-            </motion.div>
-          ))}
+        {/* 2-Column Layout: Experience vs Achievements */}
+        <div className="about-grid">
+          
+          {/* Left Column: Timeline */}
+          <div className="about-col">
+            <h3 className="about-col-title">PROFESSIONAL EXPERIENCE</h3>
+            <div className="experience-timeline">
+              {timeline.map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  className="experience-item"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.6, delay: idx * 0.15 }}
+                >
+                  <div className="experience-year-col">
+                    <span className="experience-year">{item.year}</span>
+                  </div>
+                  <div className="experience-connector">
+                    <div className="experience-dot" />
+                    <div className="experience-line" />
+                  </div>
+                  <div className="experience-content">
+                    <h4 className="experience-role">{item.title}</h4>
+                    <p className="experience-company">{item.company}</p>
+                    <p className="experience-desc">{item.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column: Achievements */}
+          <div className="about-col">
+            <h3 className="about-col-title">SELECTED ACHIEVEMENTS</h3>
+            <div className="achievements-list">
+              {achievements.map((achievement, idx) => (
+                <motion.div
+                  key={achievement.id}
+                  className="achievement-card"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.6, delay: idx * 0.2 }}
+                >
+                  <div className="achievement-glass-layer"></div>
+                  <div className="achievement-content">
+                    <div className="achievement-header">
+                      <span className="achievement-number">{achievement.id}</span>
+                      <div className="achievement-icon-wrapper">
+                        {achievement.icon}
+                      </div>
+                    </div>
+                    <h4 className="achievement-title">{achievement.title}</h4>
+                    <p className="achievement-desc">{achievement.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
         </div>
 
       </div>
