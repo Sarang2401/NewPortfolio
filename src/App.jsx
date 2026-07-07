@@ -1,86 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
-import Cursor from './components/Cursor';
 import Marquee from './components/Marquee';
 import EngineeringHighlights from './components/EngineeringHighlights';
-import Lenis from 'lenis';
-import { motion, useScroll, useSpring } from 'framer-motion';
 import './styles.css';
 
 const App = () => {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
   return (
     <div className="app">
-      {/* Custom Blend-Mode Cursor */}
-      <Cursor />
-
-      {/* Scroll progress bar */}
-      <motion.div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '2px',
-          background: 'var(--accent)',
-          transformOrigin: '0%',
-          scaleX,
-          zIndex: 9999,
-        }}
-      />
-
-      {/* Floating Hire Me Badge */}
-      <a href="#contact" className="floating-badge">
-        <div className="badge-center" />
-        <svg viewBox="0 0 100 100" width="100" height="100" className="badge-text">
-          <defs>
-            <path
-              id="circlePath"
-              d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0"
-            />
-          </defs>
-          <text fontSize="11" fontWeight="bold" fill="var(--text-secondary)" letterSpacing="1.5">
-            <textPath href="#circlePath">• FREELANCE • AVAILABLE FOR WORK</textPath>
-          </text>
-        </svg>
-      </a>
-
       <Navbar />
 
       <main>
@@ -93,7 +24,7 @@ const App = () => {
         <Contact />
       </main>
 
-      <footer className="footer">
+      <footer className="footer" style={{ paddingBottom: '2rem' }}>
         <div
           className="container footer-content"
           style={{

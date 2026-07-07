@@ -1,140 +1,134 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import RevealHeading from './RevealHeading';
+import TypewriterLabel from './TypewriterLabel';
+import FadeRiseText from './FadeRiseText';
 
-/* ─── Three core stacks ───────────────────────────────────────── */
+gsap.registerPlugin(ScrollTrigger);
+
 const stacks = [
   {
     id: '01',
     title: 'Python Backend',
     tagline: 'Production APIs built for reliability.',
-    desc:
-      'FastAPI and Django powering low-latency REST APIs, complex relational schemas, and clean service boundaries that hold up under real load.',
-    tech: ['FastAPI', 'Django', 'PostgreSQL', 'MySQL', 'REST APIs', 'System Design'],
-    image:
-      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=900&auto=format&fit=crop',
+    desc: 'FastAPI and Django powering low-latency REST APIs, complex relational schemas, and clean service boundaries that hold up under real load.',
+    tech: ['FastAPI', 'Django', 'PostgreSQL', 'Redis'],
+    className: 'bento-wide',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=900&auto=format&fit=crop'
   },
   {
     id: '02',
-    title: 'Cloud / DevOps',
-    tagline: 'Zero-touch infrastructure that ships.',
-    desc:
-      'AWS, Docker, Kubernetes, Terraform — end-to-end CI/CD, containerised microservices, and real-time observability with Prometheus and Grafana.',
-    tech: ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', 'Prometheus'],
-    image:
-      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=900&auto=format&fit=crop',
+    title: 'Cloud & DevOps',
+    tagline: 'Zero-touch infrastructure.',
+    desc: 'End-to-end CI/CD, containerised microservices, and real-time observability.',
+    tech: ['AWS', 'Docker', 'K8s', 'Terraform'],
+    className: 'bento-tall',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=900&auto=format&fit=crop'
   },
   {
     id: '03',
-    title: 'GenAI',
-    tagline: 'AI systems that work in production.',
-    desc:
-      'LLM integration, vector embeddings, semantic search pipelines — intelligent features deployed as FastAPI microservices on serverless infrastructure.',
-    tech: ['LLM APIs', 'Vector DBs', 'RAG', 'Embeddings', 'Semantic Search'],
-    image:
-      'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=900&auto=format&fit=crop',
+    title: 'GenAI Integration',
+    tagline: 'LLMs in production.',
+    desc: 'Vector embeddings and semantic search pipelines deployed via serverless.',
+    tech: ['LLM APIs', 'Vector DBs', 'RAG'],
+    className: 'bento-square',
+    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=900&auto=format&fit=crop'
   },
+  {
+    id: '04',
+    title: 'Automation & IoT',
+    tagline: 'Real-time telemetry.',
+    desc: 'Hardware integration and ML-enhanced vehicle subsystems optimizing real-time data processing.',
+    tech: ['IoT', 'ML', 'C/C++'],
+    className: 'bento-square',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=900&auto=format&fit=crop'
+  }
 ];
 
 export default function EngineeringHighlights() {
-  const [hovered, setHovered] = useState(null);
+  const containerRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.fromTo('.highlights-header-anim',
+      { opacity: 0, y: 30 },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8, 
+        stagger: 0.2, 
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 75%',
+          once: true
+        }
+      }
+    );
+
+    gsap.fromTo('.highlight-bento-card',
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.highlights-bento-grid',
+          start: 'top 80%',
+          once: true
+        }
+      }
+    );
+  }, { scope: containerRef });
 
   return (
-    <section className="flow-section">
+    <section id="what-i-build" className="highlights-section" ref={containerRef} style={{ padding: '8rem 0' }}>
       <div className="container">
-
-        {/* Header */}
-        <div className="flow-section-header">
-          <span className="section-label">Core Stack</span>
-          <h2 className="section-title" style={{ marginTop: '0.5rem' }}>
-            What I <span className="gradient-text">Build</span>
-          </h2>
+        <div className="section-header" style={{ marginBottom: '4rem' }}>
+          <TypewriterLabel className="section-label">Core Stack</TypewriterLabel>
+          <RevealHeading className="section-title text-center">
+            Deep Dives.
+          </RevealHeading>
         </div>
 
-        {/* Flowing menu list */}
-        <div className="flow-list" role="list">
-          {stacks.map((item, i) => (
-            <div
-              key={item.id}
-              className={`flow-item ${hovered === i ? 'flow-item--active' : ''}`}
-              onMouseEnter={() => setHovered(i)}
-              onMouseLeave={() => setHovered(null)}
-              role="listitem"
-            >
-              {/* top rule on first item */}
-              {i === 0 && <div className="flow-rule" />}
-
-              <div className="flow-item-inner">
-
-                {/* ── Left: content ── */}
-                <div className="flow-content">
-                  <span className="flow-number">{item.id}</span>
-
-                  <div className="flow-body">
-                    <motion.h3
-                      className="flow-title"
-                      animate={{
-                        x:     hovered === i ? 10 : 0,
-                        color: hovered === i ? '#CCFF00' : '#FFFFFF',
-                      }}
-                      transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
-                    >
-                      {item.title}
-                    </motion.h3>
-
-                    <AnimatePresence initial={false}>
-                      {hovered === i && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.42, ease: [0.04, 0.62, 0.23, 0.98] }}
-                          className="flow-detail"
-                        >
-                          <p className="flow-desc">{item.desc}</p>
-                          <div className="tech-stack" style={{ marginTop: '1rem', marginBottom: '0.5rem' }}>
-                            {item.tech.map((t) => (
-                              <span key={t} className="tech-pill">{t}</span>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-
-                  <motion.span
-                    className="flow-arrow"
-                    animate={{ x: hovered === i ? 6 : 0, opacity: hovered === i ? 1 : 0.35 }}
-                    transition={{ duration: 0.3 }}
-                    aria-hidden="true"
-                  >
-                    ↗
-                  </motion.span>
-                </div>
-
-                {/* ── Right: image that flows in from the right ── */}
-                <motion.div
-                  className="flow-image-wrap"
-                  animate={{
-                    clipPath: hovered === i
-                      ? 'inset(0 0% 0 0 round 12px)'
-                      : 'inset(0 100% 0 0 round 12px)',
-                  }}
-                  transition={{ duration: 0.65, ease: [0.25, 1, 0.5, 1] }}
-                  aria-hidden="true"
-                >
-                  <img src={item.image} alt="" className="flow-image" loading="lazy" decoding="async" />
-                  {/* Gradient bleed so image merges into the background */}
-                  <div className="flow-image-bleed" />
-                </motion.div>
-
+        <FadeRiseText className="highlights-bento-grid">
+          {stacks.map((item) => (
+            <div key={item.id} className={`highlight-bento-card ${item.className}`}>
+              
+              {/* Visual Asset Background */}
+              <div className="bento-visual">
+                <img src={item.image} alt="" loading="lazy" />
               </div>
 
-              {/* bottom rule */}
-              <div className="flow-rule" />
+              {/* Text Content */}
+              <div className="highlight-bento-content">
+                <div className="highlight-bento-header">
+                  <span className="highlight-bento-id">{item.id}</span>
+                  <h3 className="highlight-bento-title">{item.title}</h3>
+                </div>
+                
+                <div className="highlight-bento-body">
+                  <h4 className="highlight-bento-tagline">{item.tagline}</h4>
+                  <p className="highlight-bento-desc">{item.desc}</p>
+                </div>
+
+                <div className="highlight-bento-footer">
+                  <div className="tech-stack" style={{ gap: '0.5rem' }}>
+                    {item.tech.map((t) => (
+                      <span key={t} className="tech-pill" style={{ fontSize: '0.75rem', padding: '0.4rem 0.8rem', background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(8px)', borderColor: 'rgba(255,255,255,0.1)' }}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
             </div>
           ))}
-        </div>
-
+        </FadeRiseText>
       </div>
     </section>
   );

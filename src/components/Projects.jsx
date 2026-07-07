@@ -1,24 +1,45 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import projectsData from '../data/projects';
 import ProjectCard from './ProjectCard';
+import RevealHeading from './RevealHeading';
+import TypewriterLabel from './TypewriterLabel';
+import FadeRiseText from './FadeRiseText';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Projects = () => {
+  const containerRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.fromTo('.projects-header-anim',
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.projects-section',
+          start: 'top 75%',
+          once: true
+        }
+      }
+    );
+  }, { scope: containerRef });
+
   return (
-    <section id="projects" className="projects-section">
+    <section id="projects" className="projects-section" ref={containerRef}>
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="section-label">Selected Work</span>
-          <h2 className="section-title">
-            Engineering <span className="gradient-text-accent">Systems</span> That Scale
-          </h2>
-        </motion.div>
+        <div className="section-header">
+          <TypewriterLabel className="section-label">Selected Work</TypewriterLabel>
+          <RevealHeading className="section-title">
+            Engineering Systems That Scale
+          </RevealHeading>
+        </div>
 
         <div className="projects-stack-container">
           {projectsData.map((project, index) => (

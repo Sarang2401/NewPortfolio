@@ -1,0 +1,206 @@
+/* Island Navbar Styles */
+
+.island-wrapper {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  max-width: calc(100vw - 3rem);
+}
+
+.island-main {
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+  position: relative;
+  z-index: 3;
+}
+
+.island-brand {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: white;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+.island-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: var(--accent);
+  border-radius: 50%;
+  margin-left: 2px;
+}
+
+.island-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255,255,255,0.1);
+  margin: 0 0.25rem;
+}
+
+.island-domain-container {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  overflow: hidden;
+}
+
+.island-domain-text {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  animation: domain-cycle 2.5s infinite cubic-bezier(0.25, 1, 0.5, 1);
+  text-align: center;
+  white-space: nowrap;
+}
+
+@keyframes domain-cycle {
+  0% { opacity: 0; transform: translateY(15px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-15px); }
+}
+
+.island-btn {
+  background: white;
+  color: black;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.6rem 1rem;
+  border-radius: 99px;
+  text-decoration: none;
+  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), background 0.2s;
+  box-shadow: 0 4px 10px rgba(255,255,255,0.1);
+}
+
+.island-btn:hover {
+  background: var(--accent);
+  transform: scale(1.05);
+}
+
+.island-dropdown {
+  height: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  margin-top: -12px; /* Pull up to hide under main bar */
+}
+
+.island-dropdown-inner {
+  background: rgba(20, 20, 20, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+  padding: 2.5rem 1.5rem 1.5rem; /* Extra top padding due to margin-top overlap */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.island-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.island-sub-links {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1rem;
+}
+
+.island-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  padding: 0.6rem 0;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.island-nav-item:hover {
+  color: white;
+  letter-spacing: 0.12em; /* 0.02em increase from 0.1em */
+  transform: translateX(8px);
+}
+
+.island-nav-arrow {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s, transform 0.3s;
+  color: var(--accent);
+}
+
+.island-nav-item:hover .island-nav-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.island-tab-container {
+  display: flex;
+  padding-left: 2rem;
+  z-index: 1;
+  margin-top: -12px; /* Pull up behind dropdown/main bar */
+}
+
+.island-tab {
+  background: rgba(30, 30, 30, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  padding: 0.5rem 1.25rem 0.5rem 1.25rem;
+  padding-top: 1.25rem; /* Extra padding because it's tucked under */
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+
+.island-tab:hover {
+  color: white;
+  background: rgba(45, 45, 45, 0.9);
+}
+
+@media (max-width: 480px) {
+  .island-wrapper {
+    width: calc(100vw - 2rem);
+    left: 1rem;
+    top: 1rem;
+  }
+  .island-main {
+    padding: 0.75rem 1rem;
+  }
+  .island-divider, .island-domain-container {
+    display: none;
+  }
+}

@@ -1,26 +1,27 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
 import { ArrowRight, FileText } from 'lucide-react';
-import Magnetic from './Magnetic';
 import PixelTransition from './PixelTransition';
-
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 36 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.75, ease: [0.25, 1, 0.5, 1] },
-  },
-};
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import SplitCharReveal from './SplitCharReveal';
+import TypewriterLabel from './TypewriterLabel';
+import FadeRiseText from './FadeRiseText';
 
 export default function Hero() {
+  const containerRef = useRef(null);
+
+    // Name and domains are handled by internal GSAP now.
+    // We only need to animate the tagline and actions here if they aren't handled by FadeRiseText.
+    // Since we'll wrap tagline and actions in FadeRiseText, we can drop the GSAP timeline from Hero.jsx entirely!
+    // Right side blur animate
+    gsap.fromTo('.hero-right',
+      { opacity: 0, x: 30, filter: 'blur(10px)' },
+      { opacity: 1, x: 0, filter: 'blur(0px)', duration: 1.2, ease: 'power3.out', delay: 0.2 }
+    );
+  }, { scope: containerRef });
+
   return (
-    <section id="hero" className="hero">
+    <section id="hero" className="hero" ref={containerRef}>
       {/* Subtle dot grid */}
       <div className="hero-grid" />
 
@@ -28,70 +29,50 @@ export default function Hero() {
         <div className="hero-layout-v2">
 
           {/* ── Left: Billboard Typography ── */}
-          <motion.div
-            className="hero-left"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {/* Availability pill */}
-            <motion.div variants={itemVariants}>
-              <div className="availability-badge">
-                <span className="status-dot" />
-                Available for opportunities
-              </div>
-            </motion.div>
+          <div className="hero-left">
+
 
             {/* Massive stacked name */}
-            <motion.div className="hero-name" variants={itemVariants}>
-              <div className="hero-name-line">SARANG</div>
-              <div className="hero-name-line">SHIGWAN</div>
-            </motion.div>
+            <div className="hero-name" style={{ marginBottom: '1.5rem' }}>
+              <SplitCharReveal text="SARANG" className="hero-name-line" style={{ display: 'block' }} />
+              <SplitCharReveal text="SHIGWAN" className="hero-name-line" style={{ display: 'block' }} />
+            </div>
 
             {/* Domain tags */}
-            <motion.div className="hero-domains" variants={itemVariants}>
-              <span>CLOUD</span>
+            <div className="hero-domains" style={{ marginBottom: '2rem' }}>
+              <TypewriterLabel>CLOUD</TypewriterLabel>
               <span className="hero-domain-sep">•</span>
-              <span>AI</span>
+              <TypewriterLabel>AI</TypewriterLabel>
               <span className="hero-domain-sep">•</span>
-              <span>SECURITY</span>
-            </motion.div>
+              <TypewriterLabel>SECURITY</TypewriterLabel>
+            </div>
 
-            {/* Tagline */}
-            <motion.p className="hero-tagline" variants={itemVariants}>
-              Building scalable systems, AI-powered applications,
-              and cloud-native solutions that hold up in production.
-            </motion.p>
+            <FadeRiseText>
+              <p className="hero-tagline">
+                Building scalable systems, AI-powered applications,
+                and cloud-native solutions that hold up in production.
+              </p>
 
-            {/* CTAs */}
-            <motion.div className="hero-actions" variants={itemVariants}>
-              <Magnetic strength={0.3}>
-                <a href="#projects" className="btn btn-primary">
-                  View Projects <ArrowRight size={16} />
-                </a>
-              </Magnetic>
-              <Magnetic strength={0.3}>
-                <a
-                  href="/resumes/SarangShigwan_Resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline"
-                >
-                  <FileText size={16} /> Resume
-                </a>
-              </Magnetic>
-            </motion.div>
-          </motion.div>
+              {/* CTAs */}
+              <div className="hero-actions">
+              <a href="#projects" className="btn btn-primary">
+                View Projects <ArrowRight size={16} />
+              </a>
+              <a
+                href="/resumes/SarangShigwan_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline"
+              >
+                <FileText size={16} /> Resume
+              </div>
+            </FadeRiseText>
+          </div>
 
           {/* ── Right: Pixel Transition Image ── */}
-          <motion.div
-            className="hero-right"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.1, delay: 0.3, ease: [0.25, 1, 0.5, 1] }}
-          >
+          <div className="hero-right">
             <PixelTransition />
-          </motion.div>
+          </div>
 
         </div>
       </div>

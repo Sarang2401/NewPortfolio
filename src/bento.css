@@ -1,0 +1,292 @@
+/* Bento Grid Styles for Premium 1% aesthetic */
+
+/* ===== WHAT I BUILD GRID (ASYMMETRICAL) ===== */
+.highlights-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  grid-auto-rows: minmax(300px, auto);
+}
+
+@media (min-width: 900px) {
+  .highlights-bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, minmax(320px, auto));
+  }
+  
+  .bento-wide {
+    grid-column: span 2;
+  }
+  
+  .bento-tall {
+    grid-row: span 2;
+  }
+  
+  .bento-square {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
+.highlight-bento-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 40px -10px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s;
+}
+
+.highlight-bento-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(204, 255, 0, 0.2);
+}
+
+/* The visual asset container inside the card */
+.bento-visual {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bento-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.1) brightness(0.6);
+  transition: filter 0.5s;
+}
+
+.highlight-bento-card:hover .bento-visual img {
+  filter: grayscale(40%) contrast(1.1) brightness(0.8);
+}
+
+/* Specific visual placements */
+.bento-wide .bento-visual {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  mask-image: linear-gradient(to right, transparent, black 60%);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 60%);
+}
+
+.bento-tall .bento-visual {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  mask-image: linear-gradient(to top, transparent, black 50%);
+  -webkit-mask-image: linear-gradient(to top, transparent, black 50%);
+}
+
+.bento-square .bento-visual {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.3;
+  mask-image: radial-gradient(circle at center, black, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at center, black, transparent 70%);
+}
+
+/* Content wrapper to stay above visuals */
+.highlight-bento-content {
+  position: relative;
+  z-index: 1;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .bento-wide .highlight-bento-content {
+    width: 65%;
+  }
+}
+
+.highlight-bento-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.highlight-bento-id {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.highlight-bento-title {
+  font-size: 1.75rem;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.highlight-bento-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.highlight-bento-tagline {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin: 0;
+}
+
+.highlight-bento-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.highlight-bento-footer {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+/* ===== BASE BENTO GRID (Used in Skills) ===== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+.bento-card {
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 24px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 40px -10px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s;
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(204, 255, 0, 0.2);
+}
+
+.bento-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.bento-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+.bento-card-title {
+  font-size: 1.25rem;
+  margin: 0;
+}
+.bento-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.bento-skill-pill {
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ===== ARCHITECTURAL GRID (Used in Skills) ===== */
+.skills-arch-wrapper {
+  position: relative;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.skills-arch-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .skills-arch-grid {
+    flex-direction: row;
+  }
+}
+
+.skills-arch-col {
+  flex: 1;
+  position: relative;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (min-width: 768px) {
+  .skills-arch-col {
+    padding: 4rem 2.5rem;
+    border-bottom: none;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .skills-arch-col:first-child {
+    padding-left: 0;
+  }
+  
+  .skills-arch-col:last-child {
+    border-right: none;
+    padding-right: 0;
+  }
+}
+
+.skills-arch-title {
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+}
+
+.skills-arch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.skills-arch-item {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.3s;
+  cursor: default;
+  transform-origin: left;
+}
+
+.skills-arch-item:hover {
+  color: var(--accent);
+  transform: translateX(12px);
+}
+

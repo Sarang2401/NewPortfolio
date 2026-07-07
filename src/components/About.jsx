@@ -1,28 +1,37 @@
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
 import { Trophy, Award } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import RevealHeading from './RevealHeading';
+import TypewriterLabel from './TypewriterLabel';
+import FadeRiseText from './FadeRiseText';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const AnimatedCounter = ({ to, suffix = '' }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-60px' });
-  const [value, setValueState] = React.useState(0);
 
-  React.useEffect(() => {
-    if (!isInView) return;
-    const duration = 1800;
-    const startTime = Date.now();
-    const tick = () => {
-      const progress = Math.min((Date.now() - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValueState(Math.round(eased * to));
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [isInView, to]);
+  useGSAP(() => {
+    gsap.fromTo(ref.current, 
+      { innerHTML: 0 }, 
+      { 
+        innerHTML: to, 
+        duration: 2, 
+        ease: 'power3.out', 
+        snap: { innerHTML: 1 },
+        scrollTrigger: {
+          trigger: ref.current,
+          start: 'top 85%',
+          once: true
+        }
+      }
+    );
+  }, []);
 
   return (
-    <span ref={ref}>
-      {value}
+    <span>
+      <span ref={ref}>0</span>
       <span style={{ color: 'var(--accent)' }}>{suffix}</span>
     </span>
   );
@@ -54,44 +63,57 @@ const stats = [
 const achievements = [
   {
     id: '01',
-    title: 'IEEE RESEARCH PRESENTER',
+    title: 'IEEE Research Presenter',
     description: 'Presented research work at an international IEEE conference, showcasing innovation, technical depth, and problem-solving ability through applied engineering research.',
     icon: <Award size={24} className="achievement-icon-svg" />
   },
   {
     id: '02',
-    title: 'HACKATHON FINALIST & WINNER',
+    title: 'Hackathon Finalist & Winner',
     description: 'Built innovative solutions under high-pressure environments, collaborating with teams to solve real-world problems across AI, cloud, and cybersecurity domains.',
     icon: <Trophy size={24} className="achievement-icon-svg" />
   }
 ];
 
 export default function About() {
+  const containerRef = useRef(null);
+
+  useGSAP(() => {
+    // RevealHeading, TypewriterLabel, and FadeRiseText handle their own animations.
+    // We only need to animate the stats strip and achievements.
+
+    // Stats reveal
+    gsap.fromTo('.experience-stat',
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.experience-stats',
+          start: 'top 80%',
+          once: true
+        }
+      }
+    );
+
+    // Timeline and achievements are animated below
+  }, { scope: containerRef });
+
   return (
-    <section id="about" className="experience-section">
+    <section id="about" className="experience-section" ref={containerRef}>
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="section-label">Background</span>
-          <h2 className="section-title">
-            Engineer by Trade.<br />
-            <span className="gradient-text">Builder by Nature.</span>
-          </h2>
-        </motion.div>
+        <div className="section-header">
+          <TypewriterLabel className="section-label">Background</TypewriterLabel>
+          <RevealHeading className="section-title">
+            Engineer by Trade. Builder by Nature.
+          </RevealHeading>
+        </div>
 
         {/* Stats strip */}
-        <motion.div
-          className="experience-stats"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        <div className="experience-stats">
           {stats.map((s) => (
             <div className="experience-stat" key={s.label}>
               <div className="stat-value">
@@ -100,24 +122,19 @@ export default function About() {
               <div className="stat-label">{s.label}</div>
             </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* 2-Column Layout: Experience vs Achievements */}
         <div className="about-grid">
           
           {/* Left Column: Timeline */}
           <div className="about-col">
-            <h3 className="about-col-title">PROFESSIONAL EXPERIENCE</h3>
-            <div className="experience-timeline">
+            <TypewriterLabel className="about-col-title" style={{ letterSpacing: '0.05em', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+              Professional Experience
+            </TypewriterLabel>
+            <FadeRiseText className="experience-timeline">
               {timeline.map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  className="experience-item"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.6, delay: idx * 0.15 }}
-                >
+                <div key={idx} className="experience-item">
                   <div className="experience-year-col">
                     <span className="experience-year">{item.year}</span>
                   </div>
@@ -130,24 +147,24 @@ export default function About() {
                     <p className="experience-company">{item.company}</p>
                     <p className="experience-desc">{item.description}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </div>
+            </FadeRiseText>
           </div>
 
           {/* Right Column: Achievements */}
           <div className="about-col">
-            <h3 className="about-col-title">SELECTED ACHIEVEMENTS</h3>
-            <div className="achievements-list">
-              {achievements.map((achievement, idx) => (
-                <motion.div
-                  key={achievement.id}
-                  className="achievement-card"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.6, delay: idx * 0.2 }}
-                >
+            <TypewriterLabel className="about-col-title" style={{ letterSpacing: '0.05em', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+              Selected Achievements
+            </TypewriterLabel>
+            <FadeRiseText className="achievements-list">
+              {achievements.map((achievement) => (
+                <div key={achievement.id} className="achievement-card" style={{
+                  background: 'var(--surface)',
+                  border: '1px solid rgba(255,255,255,0.06)',
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.05), 0 10px 40px -10px rgba(0,0,0,0.6)',
+                  borderRadius: '16px'
+                }}>
                   <div className="achievement-glass-layer"></div>
                   <div className="achievement-content">
                     <div className="achievement-header">
@@ -159,9 +176,9 @@ export default function About() {
                     <h4 className="achievement-title">{achievement.title}</h4>
                     <p className="achievement-desc">{achievement.description}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </div>
+            </FadeRiseText>
           </div>
 
         </div>

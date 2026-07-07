@@ -1,80 +1,116 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Server, Cloud, ShieldCheck, Layout } from 'lucide-react';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import RevealHeading from './RevealHeading';
+import TypewriterLabel from './TypewriterLabel';
+import FadeRiseText from './FadeRiseText';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const techCategories = [
   {
     title: 'Backend & Systems',
-    icon: <Server size={18} />,
-    skills: ['Python', 'FastAPI', 'Django', 'Go', 'Java', 'PostgreSQL', 'MySQL', 'Redis']
+    skills: ['Python', 'FastAPI', 'Django', 'Go', 'Java', 'PostgreSQL', 'Redis']
   },
   {
-    title: 'Cloud & Infrastructure',
-    icon: <Cloud size={18} />,
-    skills: ['AWS', 'Terraform', 'Docker', 'Kubernetes', 'Linux']
+    title: 'Cloud & Infra',
+    skills: ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'Linux']
   },
   {
     title: 'DevOps & Security',
-    icon: <ShieldCheck size={18} />,
-    skills: ['GitHub Actions', 'CI/CD', 'Prometheus', 'Grafana', 'Ansible', 'Nginx', 'Cybersecurity', 'OWASP']
+    skills: ['GitHub Actions', 'CI/CD', 'Prometheus', 'Grafana', 'Cybersecurity']
   },
   {
-    title: 'Frontend & Architecture',
-    icon: <Layout size={18} />,
-    skills: ['React', 'TypeScript', 'System Design']
+    title: 'Architecture',
+    skills: ['System Design', 'Microservices', 'React', 'TypeScript']
   }
 ];
 
-const Skills = () => {
+export default function Skills() {
+  const containerRef = useRef(null);
+
+  useGSAP(() => {
+    // Reveal horizontal lines
+    gsap.fromTo('.skills-arch-wrapper',
+      { scaleX: 0, transformOrigin: 'center' },
+      { 
+        scaleX: 1, 
+        duration: 1.2, 
+        ease: 'power3.inOut',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 75%',
+          once: true
+        }
+      }
+    );
+
+    // Reveal vertical dividers
+    gsap.fromTo('.skills-arch-col',
+      { borderRightColor: 'rgba(255,255,255,0)' },
+      { 
+        borderRightColor: 'rgba(255,255,255,0.1)', 
+        duration: 1.2, 
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: '.skills-arch-grid',
+          start: 'top 75%',
+          once: true
+        }
+      }
+    );
+
+    // Reveal text
+    gsap.fromTo('.skills-anim-reveal',
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.05,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.skills-arch-grid',
+          start: 'top 75%',
+          once: true
+        }
+      }
+    );
+  }, { scope: containerRef });
+
   return (
-    <section id="skills" className="skills-section">
+    <section id="skills" className="skills-section" ref={containerRef} style={{ padding: '6rem 0' }}>
       <div className="container">
         
-        {/* Section header */}
-        <motion.div
-          className="section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="section-label">Core Competencies</span>
-          <h2 className="section-title">
-            Technical <span className="gradient-text">Arsenal</span>
-          </h2>
-        </motion.div>
-
-        {/* Bento Grid Layout */}
-        <div className="bento-grid">
-          {techCategories.map((category, idx) => (
-            <motion.div
-              key={category.title}
-              className="bento-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-            >
-              <div className="bento-card-header">
-                <div className="bento-icon-wrapper">
-                  {category.icon}
-                </div>
-                <h3 className="bento-card-title">{category.title}</h3>
-              </div>
-              <div className="bento-skills-list">
-                {category.skills.map(skill => (
-                  <span key={skill} className="bento-skill-pill">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+        <div className="section-header" style={{ marginBottom: '4rem' }}>
+          <TypewriterLabel className="section-label">Core Competencies</TypewriterLabel>
+          <RevealHeading className="section-title text-center">
+            Technical Arsenal.
+          </RevealHeading>
         </div>
+
+        {/* Brutalist Architectural Grid */}
+        <FadeRiseText className="brutalist-grid">
+          <div className="skills-arch-grid">
+            {techCategories.map((category) => (
+              <div key={category.title} className="skills-arch-col">
+                <h3 className="skills-arch-title skills-anim-reveal">
+                  {category.title}
+                </h3>
+                <ul className="skills-arch-list">
+                  {category.skills.map(skill => (
+                    <li key={skill} className="skills-arch-item skills-anim-reveal">
+                      {skill}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </FadeRiseText>
 
       </div>
     </section>
   );
-};
-
-export default Skills;
+}

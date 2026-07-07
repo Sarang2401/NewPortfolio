@@ -1,8 +1,31 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
 import { Github, ArrowUpRight } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ProjectCard = ({ project, index }) => {
+  const cardRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.fromTo(cardRef.current,
+      { opacity: 0, y: 60 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: 'top 85%',
+          once: true
+        }
+      }
+    );
+  }, []);
+
   return (
     <div
       className="project-sticky-container"
@@ -11,13 +34,7 @@ const ProjectCard = ({ project, index }) => {
         zIndex: index + 1,
       }}
     >
-      <motion.div
-        className="project-panel"
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
-      >
+      <div className="project-panel" ref={cardRef}>
         <div className="project-panel-inner">
 
           {/* ── Content side ── */}
@@ -97,7 +114,7 @@ const ProjectCard = ({ project, index }) => {
           </div>
 
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };

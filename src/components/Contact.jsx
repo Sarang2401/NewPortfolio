@@ -3,6 +3,9 @@ import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, Send, CheckCircle, AlertCircle, Loader } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import Magnetic from './Magnetic';
+import RevealHeading from './RevealHeading';
+import TypewriterLabel from './TypewriterLabel';
+import FadeRiseText from './FadeRiseText';
 
 /* ─────────────────────────────────────────────────────────
    Replace these three values after you set up EmailJS:
@@ -67,17 +70,18 @@ const Contact = () => {
 
           {/* ── Left: CTA column ── */}
           <div className="contact-left">
-            <span className="section-label">Get in Touch</span>
+            <TypewriterLabel className="section-label">Get in Touch</TypewriterLabel>
 
-            <h2 className="contact-title">
-              Have a project<br />
-              <span className="gradient-text">in mind?</span>
-            </h2>
+            <RevealHeading className="contact-title">
+              Have a project in mind?
+            </RevealHeading>
 
-            <p className="contact-desc" style={{ textAlign: 'left', marginLeft: 0 }}>
-              I'm currently available for freelance projects and full-time opportunities.
-              Drop me a message and I'll get back to you within 24 hours.
-            </p>
+            <FadeRiseText>
+              <p className="contact-desc" style={{ textAlign: 'left', marginLeft: 0 }}>
+                I'm currently available for freelance projects and full-time opportunities.
+                Drop me a message and I'll get back to you within 24 hours.
+              </p>
+            </FadeRiseText>
 
             {/* Social links */}
             <div className="contact-socials">
