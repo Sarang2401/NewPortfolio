@@ -109,9 +109,8 @@
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-top: none;
-  border-radius: 0 0 20px 20px;
-  padding: 2.5rem 1.5rem 1.5rem; /* Extra top padding due to margin-top overlap */
+  border-radius: 20px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -162,33 +161,34 @@
 
 .island-tab-container {
   display: flex;
-  padding-left: 2rem;
+  padding-left: 0;
   z-index: 1;
-  margin-top: -12px; /* Pull up behind dropdown/main bar */
+  margin-top: 16px;
 }
 
 .island-tab {
-  background: rgba(30, 30, 30, 0.9);
-  backdrop-filter: blur(8px);
+  background: rgba(15, 15, 15, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-top: none;
-  border-radius: 0 0 16px 16px;
-  padding: 0.5rem 1.25rem 0.5rem 1.25rem;
-  padding-top: 1.25rem; /* Extra padding because it's tucked under */
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
   color: var(--text-secondary);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
-  transition: color 0.2s, background 0.2s;
+  transition: all 0.2s;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
 .island-tab:hover {
   color: white;
-  background: rgba(45, 45, 45, 0.9);
+  background: rgba(30, 30, 30, 0.85);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 480px) {

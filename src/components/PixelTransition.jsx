@@ -42,7 +42,7 @@ export default function PixelTransition() {
         alignItems: 'center',
         position: 'relative',
         width: '100%',
-        aspectRatio: '3/4',
+        height: '100%',
         margin: '0 auto',
         cursor: 'default'
       }}
@@ -63,10 +63,12 @@ export default function PixelTransition() {
       }} />
 
       {/* Hero Image Container */}
-      <div 
+      <div
+        className="pixel-frame"
         style={{
           width: '100%',
           height: '100%',
+          maxHeight: 'calc(100vh - 8rem)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
