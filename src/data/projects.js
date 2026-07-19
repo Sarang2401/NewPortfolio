@@ -44,7 +44,7 @@ const projects = [
     category: 'Security Platform',
     tagline: 'Enterprise-grade threat detection & response framework.',
     description:
-      'Unified cybersecurity platform integrating real-time threat intelligence, automated incident response, and red-teaming capabilities. Engineered for enterprise scalability — cutting mean time-to-detect by 60% vs manual workflows.',
+      'Unified cybersecurity platform integrating real-time threat intelligence, automated incident response, and red-teaming capabilities. Engineered for enterprise scalability - cutting mean time-to-detect by 60% vs manual workflows.',
     outcomes: ['60% faster threat detection', 'Automated IR playbooks', 'Red-team ready'],
     tech: ['Python', 'FastAPI', 'Docker', 'OWASP', 'ML Anomaly Detection'],
     image: artemis,
@@ -56,7 +56,7 @@ const projects = [
     category: 'DevOps Pipeline',
     tagline: 'Zero-touch CI/CD from commit to production.',
     description:
-      'Fully automated DevOps pipeline for cloud-native applications. Integrates AWS, Docker, Terraform, and GitHub Actions to deliver end-to-end CI/CD — eliminating manual deployment steps and reducing release cycles from hours to minutes.',
+      'Fully automated DevOps pipeline for cloud-native applications. Integrates AWS, Docker, Terraform, and GitHub Actions to deliver end-to-end CI/CD - eliminating manual deployment steps and reducing release cycles from hours to minutes.',
     outcomes: ['Zero manual deployments', 'Infrastructure-as-Code with Terraform', 'Multi-env support'],
     tech: ['AWS', 'Docker', 'Terraform', 'GitHub Actions', 'Jenkins'],
     image: devdock,

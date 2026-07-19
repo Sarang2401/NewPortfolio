@@ -21,28 +21,9 @@ const App = () => {
         <EngineeringHighlights />
         <Skills />
         <About />
-        <Contact />
       </main>
 
-      <footer className="footer" style={{ paddingBottom: '2rem' }}>
-        <div
-          className="container footer-content"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1rem',
-            textAlign: 'center',
-          }}
-        >
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-            Made with 💻, ☕ and ❤️ by Sarang Shigwan
-          </p>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', opacity: 0.6 }}>
-            © {new Date().getFullYear()} All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Contact />
     </div>
   );
 };

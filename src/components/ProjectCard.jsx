@@ -1,118 +1,80 @@
 import React, { useRef } from 'react';
 import { Github, ArrowUpRight } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project, index, isActive, onClick }) => {
   const cardRef = useRef(null);
-
-  useGSAP(() => {
-    gsap.fromTo(cardRef.current,
-      { opacity: 0, y: 60 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: cardRef.current,
-          start: 'top 85%',
-          once: true
-        }
-      }
-    );
-  }, []);
 
   return (
     <div
-      className="project-sticky-container"
-      style={{
-        top: `calc(80px + ${index * 28}px)`,
-        zIndex: index + 1,
-      }}
+      ref={cardRef}
+      className={`acc-card ${isActive ? 'acc-card--active' : ''}`}
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === 'Enter' && onClick()}
+      aria-label={`View project: ${project.name}`}
     >
-      <div className="project-panel" ref={cardRef}>
-        <div className="project-panel-inner">
+      {/* Background image always present */}
+      <div className="acc-card-bg">
+        <img src={project.image} alt={project.name} loading="lazy" decoding="async" />
+        <div className="acc-card-bg-overlay" />
+      </div>
 
-          {/* ── Content side ── */}
-          <div className="project-panel-content">
+      {/* ── COLLAPSED state: vertical title ── */}
+      <div className="acc-card-collapsed">
+        <span className="acc-card-idx">0{index + 1}</span>
+        <span className="acc-card-vtitle">{project.name}</span>
+        <span className="acc-card-vcat">{project.category}</span>
+      </div>
 
-            {/* Top meta row */}
-            <div className="project-meta-row">
-              <span className="project-index">0{index + 1}</span>
-              <span className="project-category">{project.category}</span>
-            </div>
+      {/* ── EXPANDED state: full content at bottom ── */}
+      <div className="acc-card-expanded">
+        {/* Top meta */}
+        <div className="acc-expanded-top">
+          <span className="acc-expanded-idx">0{index + 1}</span>
+          <span className="acc-expanded-cat">{project.category}</span>
+        </div>
 
-            {/* Title */}
-            <h3 className="project-title">{project.name}</h3>
+        {/* Bottom content */}
+        <div className="acc-expanded-bottom">
+          <h3 className="acc-expanded-title">{project.name}</h3>
+          <p className="acc-expanded-tagline">{project.tagline}</p>
+          <p className="acc-expanded-desc">{project.description}</p>
 
-            {/* Impact statement */}
-            <p className="project-tagline">{project.tagline}</p>
+          {/* Tech pills */}
+          <div className="acc-tech-stack">
+            {project.tech.slice(0, 4).map((t, i) => (
+              <span key={i} className="acc-tech-pill">{t}</span>
+            ))}
+          </div>
 
-            {/* Description */}
-            <p className="project-desc">{project.description}</p>
-
-            {/* Key outcomes */}
-            {project.outcomes && project.outcomes.length > 0 && (
-              <div className="project-outcomes">
-                {project.outcomes.map((o, i) => (
-                  <div key={i} className="project-outcome-item">
-                    <span className="project-outcome-check">✓</span>
-                    <span>{o}</span>
-                  </div>
-                ))}
-              </div>
+          {/* CTA row */}
+          <div className="acc-ctas">
+            {project.githubLink && (
+              <a
+                href={project.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="acc-cta-link"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Github size={14} />
+                View on GitHub
+              </a>
             )}
-
-            {/* Tech pills */}
-            <div className="tech-stack">
-              {project.tech.map((t, i) => (
-                <span key={i} className="tech-pill">{t}</span>
-              ))}
-            </div>
-
-            {/* CTA buttons */}
-            <div className="project-ctas">
-              {project.githubLink && (
-                <a
-                  href={project.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-cta-btn project-cta-btn--ghost"
-                >
-                  <Github size={14} />
-                  GitHub
-                </a>
-              )}
-              {project.liveLink && (
-                <a
-                  href={project.liveLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-cta-btn project-cta-btn--primary"
-                >
-                  Live Demo
-                  <ArrowUpRight size={14} />
-                </a>
-              )}
-            </div>
-
+            {project.liveLink && (
+              <a
+                href={project.liveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="acc-cta-link acc-cta-link--primary"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Live Demo
+                <ArrowUpRight size={14} />
+              </a>
+            )}
           </div>
-
-          {/* ── Image side ── */}
-          <div className="project-panel-image">
-            <img
-              src={project.image}
-              alt={project.name}
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="project-image-overlay" />
-          </div>
-
         </div>
       </div>
     </div>

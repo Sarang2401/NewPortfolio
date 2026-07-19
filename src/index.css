@@ -1,6 +1,6 @@
 @import './bento.css';
 @import './navbar-island.css';
-/* Base resets — full design system lives in styles.css */
+/* Base resets - full design system lives in styles.css */
 #root {
   width: 100%;
   margin: 0 auto;

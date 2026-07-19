@@ -1,52 +1,33 @@
-import React, { useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import React, { useState } from 'react';
 import projectsData from '../data/projects';
 import ProjectCard from './ProjectCard';
-import RevealHeading from './RevealHeading';
 import TypewriterLabel from './TypewriterLabel';
-import FadeRiseText from './FadeRiseText';
-
-gsap.registerPlugin(ScrollTrigger);
+import RevealHeading from './RevealHeading';
 
 const Projects = () => {
-  const containerRef = useRef(null);
-
-  useGSAP(() => {
-    gsap.fromTo('.projects-header-anim',
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.projects-section',
-          start: 'top 75%',
-          once: true
-        }
-      }
-    );
-  }, { scope: containerRef });
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="projects" className="projects-section" ref={containerRef}>
+    <section id="projects" className="projects-section">
       <div className="container">
-        <div className="section-header">
+        <div className="section-header projects-header-anim">
           <TypewriterLabel className="section-label">Selected Work</TypewriterLabel>
           <RevealHeading className="section-title">
             Engineering Systems That Scale
           </RevealHeading>
         </div>
+      </div>
 
-        <div className="projects-stack-container">
+      {/* Full-width accordion - no container constraint */}
+      <div className="projects-accordion-wrap">
+        <div className="projects-accordion">
           {projectsData.map((project, index) => (
             <ProjectCard
               key={index}
               project={project}
               index={index}
+              isActive={activeIndex === index}
+              onClick={() => setActiveIndex(index)}
             />
           ))}
         </div>

@@ -20,7 +20,7 @@ export default function Cursor() {
     const moveCursor = (e) => {
       cursorX.set(e.clientX - 16);
       cursorY.set(e.clientY - 16);
-      // Drive the spotlight via CSS variables — zero React re-renders
+      // Drive the spotlight via CSS variables - zero React re-renders
       document.documentElement.style.setProperty('--cursor-x', `${e.clientX}px`);
       document.documentElement.style.setProperty('--cursor-y', `${e.clientY}px`);
     };
@@ -52,7 +52,7 @@ export default function Cursor() {
 
   return (
     <>
-      {/* Radial spotlight that follows cursor — pure CSS, no re-renders */}
+      {/* Radial spotlight that follows cursor - pure CSS, no re-renders */}
       <div className="cursor-spotlight" />
 
       {/* Blend-mode dot cursor */}
